@@ -2,7 +2,7 @@
 
 Ohjelman tarkoituksena on tiivistää tietoa. Se saa syötteenä tekstitiedoston, jonka ohjelma tiivistää pienempään muotoon. Tiedoston saa myös takaisin alkuperäiseen muotoonsa. Käytän kielenä javaa.
 
-Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on $O(n \log n)$.
+Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n log n).
 
 ### Lähteet
 https://en.wikipedia.org/wiki/Huffman_coding
