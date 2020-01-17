@@ -5,8 +5,8 @@ Ohjelman tarkoituksena on tiivistää tietoa. Se saa syötteenä tekstitiedoston
 Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n log n).
 
 ### Lähteet
-https://en.wikipedia.org/wiki/Huffman_coding
+- https://en.wikipedia.org/wiki/Huffman_coding
 
 ### Mahdollisia lähteitä
-https://www.cs.auckland.ac.nz/software/AlgAnim/huffman.html
-https://www.cs.princeton.edu/~wayne/kleinberg-tardos/pearson/04Huffman.pdf
+- https://www.cs.auckland.ac.nz/software/AlgAnim/huffman.html
+- https://www.cs.princeton.edu/~wayne/kleinberg-tardos/pearson/04Huffman.pdf
