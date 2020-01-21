@@ -5,12 +5,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.compression_project.FileHandler;
 
 
-public class FileReading {
+public class CompressionTest {
     
-    public FileReading() {
+    public CompressionTest() {
     }
     
     @BeforeClass
@@ -33,7 +32,9 @@ public class FileReading {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void openFile() {
-        FileHandler filehandler = new FileHandler();
+    public void countTest() {
+        Compression compr = new Compression();
+        assertEquals(compr.countProbs(), 5);
+        System.out.println("count succeeded");
     }
 }

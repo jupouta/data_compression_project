@@ -9,8 +9,8 @@ public class Compression {
         this.heap = new PriorityQueue<>();
     }
     
-    public void countProbs() {
-        
+    public int countProbs() {
+        return 5;
     }
     
 }
