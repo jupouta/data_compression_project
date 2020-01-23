@@ -11,4 +11,8 @@
 - Luin algoritmista ja siihen liittyvästä (https://csfieldguide.org.nz/en/chapters/coding-compression/huffman-coding/)
 - Loin alustavan testin
 
-Käytetty tuntimäärä: 5h
+###### To
+- Luin lisää algoritmista ja sen toteutuksesta
+- Loin metodin, joka laskee jokaisen merkin frekvenssin, ja testin sille
+
+Käytetty tuntimäärä: 6,5h

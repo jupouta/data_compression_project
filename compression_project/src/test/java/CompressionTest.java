@@ -1,4 +1,6 @@
 
+import tiralabra.compression_project.Compression;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,7 +36,14 @@ public class CompressionTest {
     @Test
     public void countTest() {
         Compression compr = new Compression();
-        assertEquals(compr.countProbs(), 5);
-        System.out.println("count succeeded");
+        HashMap<Character, Integer> freqs = compr.countFreqs("kissa");
+        int k = freqs.get('k');
+        int i = freqs.get('i');
+        int s = freqs.get('s');
+        int a = freqs.get('a');
+        assertEquals(k, 1);
+        assertEquals(i, 1);
+        assertEquals(s, 2);
+        assertEquals(a, 1);
     }
 }
