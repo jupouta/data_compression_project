@@ -6,9 +6,9 @@
 - Frekvensseille on tehty testi.
 - Muokkasin myös määrittelydokumenttia.
 - Seuraavaksi aion
-[ ] tehdä ohjelman loppuun
-[ ] tehdä ohjelmalle loput yksikkötestit
-[ ] lisätä checkstylen
+- [ ] tehdä ohjelman loppuun
+- [ ] tehdä ohjelmalle loput yksikkötestit
+- [ ] lisätä checkstylen
 
 ###### Su
 - Loin main-tiedoston ja suunnittelin tiedostorakennetta sekä sitä, mistä lähtisin liikkeelle.
