@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import tiralabra.compression_project.Compression;
 import java.util.HashMap;
 import org.junit.After;
@@ -35,8 +36,11 @@ public class CompressionTest {
     //
     @Test
     public void countTest() {
-        Compression compr = new Compression();
-        HashMap<Character, Integer> freqs = compr.countFreqs("kissa");
+        ArrayList<String> testList = new ArrayList<>();
+        testList.add("kissa");
+        Compression compr = new Compression(testList);
+        
+        HashMap<Character, Integer> freqs = compr.countFreqs();
         int k = freqs.get('k');
         int i = freqs.get('i');
         int s = freqs.get('s');

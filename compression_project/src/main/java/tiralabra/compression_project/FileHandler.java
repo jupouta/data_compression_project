@@ -13,14 +13,12 @@ public class FileHandler {
     }
     
     public void readFile(String filename) {
-        System.out.println(filename);
         File testFile = new File(filename);
         
         try (Scanner fileReader = new Scanner(testFile)) {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                
-                this.lines.add(line);
+                this.lines.add(line + "\n");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
