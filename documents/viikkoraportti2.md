@@ -9,6 +9,7 @@
 - [ ] tehdä ohjelman loppuun
 - [ ] tehdä ohjelmalle loput yksikkötestit
 - [ ] lisätä checkstylen
+- [ ] lukea vertailtavaan algoritmiin liittyvän artikkelin.
 
 ###### Su
 - Loin main-tiedoston ja suunnittelin tiedostorakennetta sekä sitä, mistä lähtisin liikkeelle.
@@ -30,4 +31,4 @@
 - Muokkasin koodia ohjelmaksi
 
 
-Käytetty tuntimäärä: 7,5h
+Käytetty tuntimäärä: 8h

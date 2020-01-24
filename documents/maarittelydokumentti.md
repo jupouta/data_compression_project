@@ -2,7 +2,9 @@
 
 Projektin tarkoituksena on luoda ohjelma, joka tiivistää tietoa. Ohjelma saa syötteenä tekstitiedoston, joka tiivistetään pienempään muotoon. Projektissa toteutetaan sekä tiedoston kompressointi että dekompressointi. Käytän kielenä Javaa.
 
-Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n log n). Vertailen projektissa Huffmanin algoritmia [tässä artikkelissa](https://www.cs.brandeis.edu/~dilant/cs175/%5BSiying-Dong%5D.pdf) esitettyyn algoritmiin. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkirivejä. 
+Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n log n).
+
+Vertailen projektissa Huffmanin algoritmia [tässä artikkelissa](https://www.cs.brandeis.edu/~dilant/cs175/%5BSiying-Dong%5D.pdf) esitettyyn algoritmiin. Kyseinen algoritmi eroaa Huffmanin algoritmista esimerkiksi siinä, että se toimii hyvin vain silloin, kun tekstissä on paljon toistoa; muulloin kompressio ei pienennä tiedostoa merkittävästi. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkirivejä.
 
 ### Lähteet
 - https://en.wikipedia.org/wiki/Huffman_coding
