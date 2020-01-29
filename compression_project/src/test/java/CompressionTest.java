@@ -40,11 +40,11 @@ public class CompressionTest {
         testList.add("kissa");
         Compression compr = new Compression(testList);
         
-        HashMap<Character, Integer> freqs = compr.countFreqs();
-        int k = freqs.get('k');
-        int i = freqs.get('i');
-        int s = freqs.get('s');
-        int a = freqs.get('a');
+        HashMap<String, Integer> freqs = compr.countFreqs();
+        int k = freqs.get("k");
+        int i = freqs.get("i");
+        int s = freqs.get("s");
+        int a = freqs.get("a");
         assertEquals(k, 1);
         assertEquals(i, 1);
         assertEquals(s, 2);

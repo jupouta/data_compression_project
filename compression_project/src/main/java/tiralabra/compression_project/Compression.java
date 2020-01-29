@@ -6,22 +6,41 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 
+/**
+ * The compression to be made.
+ */
 public class Compression {
-    private PriorityQueue<String> heap;
-    private HashMap<Character, Integer> hashMap;
-    private ArrayList<String> lines;
     
+    /**
+    * All the data structures needed in the compression.
+    */
+    private PriorityQueue<Node> heap;
+    private HashMap<String, Integer> hashMap;
+    private ArrayList<String> lines;
+    private String decoded;
+    
+    /**
+    * Creates a new Compression with the given list
+    * of lines found in a file.
+    * @param listLines The lines in the file to be
+    * compressed as an array list of lines.
+    */
     public Compression (ArrayList<String> listLines) {
         this.heap = new PriorityQueue<>();
         this.hashMap = new HashMap<>();
         this.lines = listLines;
     }
     
-    // count the frequencies of every character
-    public HashMap<Character, Integer> countFreqs() {
+    /**
+   * Counts the times a character is included
+   * in a file.
+   * @return the hash map with the frequencies
+   *        of every character.
+   */
+    public HashMap<String, Integer> countFreqs() {
         for (String line: this.lines) {
             for (int i = 0; i < line.length(); i++) {
-                char newChar = line.charAt(i);
+                String newChar = "" + line.charAt(i);
 
                 if (this.hashMap.containsKey(newChar)) {
                     this.hashMap.put(newChar, this.hashMap.get(newChar)+1);
@@ -30,20 +49,42 @@ public class Compression {
                 }
             }
         }
-        
-        
-        for (char key: this.hashMap.keySet()) {
-            System.out.println(key + " " + this.hashMap.get(key));
-        }
 
         return this.hashMap;
     }
     
     // TODO: the rest of the algo
+    /**
+   * Adds the counted frequencies to the
+   * priority queue.
+   */
     public void addFreqs() {
-        for (char key: this.hashMap.keySet()) {
-            
+        for (String key: this.hashMap.keySet()) {
+            heap.add(new Node(key, this.hashMap.get(key)));
         }
+        
+        while (!heap.isEmpty()) {
+            if (heap.size() == 1) {
+                System.out.println("done");
+                System.out.println(heap.peek());
+                break;
+            }
+            Node first = heap.poll();
+            System.out.println("the first: " + first);
+            Node second = heap.poll();
+            System.out.println("the second: " + second);
+            
+            String newChar = first.getChar() + second.getChar();
+            Node newNode = new Node(newChar, first.getCount()+second.getCount());
+            System.out.println("the new one: " + newNode);
+            
+            heap.add(newNode);
+        }
+        
+    }
+    
+    public PriorityQueue<Node> getHeap() {
+        return this.heap;
     }
     
 }
