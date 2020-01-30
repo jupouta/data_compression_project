@@ -18,7 +18,7 @@ public class Node implements Comparable<Node> {
      * The frequency of the character,
      *  i.e., its frequency in a file.
      */
-    public Integer count;
+    public int count;
 
    /**
     * Creates a new Node with the given character

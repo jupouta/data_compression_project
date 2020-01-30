@@ -17,5 +17,6 @@
 
 ###### Ke
 - Javadocien lisäystä
+- Checkstyle ja muuta konfigurointia
 
-Käytetty tuntimäärä: 4h
+Käytetty tuntimäärä: 6h

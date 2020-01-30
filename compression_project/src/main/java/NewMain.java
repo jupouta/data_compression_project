@@ -29,7 +29,6 @@ public class NewMain {
         
         PriorityQueue<Node> heap = compr.getHeap();
         
-        
     }
     
     

@@ -14,7 +14,6 @@ public class FileHandler {
      * The lines of the file.
      */
     private ArrayList<String> lines;
-    
     /**
      * Creates a new FileHandler.
      * No parameters needed.
