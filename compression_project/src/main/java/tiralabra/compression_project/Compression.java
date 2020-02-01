@@ -16,7 +16,7 @@ public class Compression {
     */
     private PriorityQueue<Node> heap;
     private HashMap<String, Integer> hashMap;
-    private ArrayList<String> lines;
+    private String[] lines;
     private String decoded;
     
     /**
@@ -25,7 +25,7 @@ public class Compression {
     * @param listLines The lines in the file to be
     * compressed as an array list of lines.
     */
-    public Compression (ArrayList<String> listLines) {
+    public Compression (String[] listLines) {
         this.heap = new PriorityQueue<>();
         this.hashMap = new HashMap<>();
         this.lines = listLines;
@@ -38,7 +38,15 @@ public class Compression {
    *        of every character.
    */
     public HashMap<String, Integer> countFreqs() {
-        for (String line: this.lines) {
+
+        for (int index = 0; index < this.lines.length; index++) {
+            
+            if (this.lines[index].equals("%§")) {
+                break;
+            }
+            
+            String line = this.lines[index];
+            System.out.println(line.length());
             for (int i = 0; i < line.length(); i++) {
                 String newChar = "" + line.charAt(i);
 
@@ -52,12 +60,12 @@ public class Compression {
 
         return this.hashMap;
     }
+
     
-    // TODO: the rest of the algo
     /**
-   * Adds the counted frequencies to the
-   * priority queue.
-   */
+     * Adds the counted frequencies to the
+     * priority queue.
+     */
     public void addFreqs() {
         for (String key: this.hashMap.keySet()) {
             heap.add(new Node(key, this.hashMap.get(key)));
@@ -80,7 +88,6 @@ public class Compression {
             
             heap.add(newNode);
         }
-        
     }
     
     public PriorityQueue<Node> getHeap() {

@@ -21,7 +21,7 @@ public class NewMain {
         FileHandler fileHandler = new FileHandler();
         fileHandler.readFile(filename);
         
-        ArrayList<String> fileLines = fileHandler.getLines();
+        String[] fileLines = fileHandler.getLines();
         
         Compression compr = new Compression(fileLines);
         compr.countFreqs();

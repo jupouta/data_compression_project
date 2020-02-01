@@ -2,7 +2,7 @@
 package tiralabra.compression_project;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -11,15 +11,19 @@ import java.util.Scanner;
  */
 public class FileHandler {
     /**
-     * The lines of the file.
+     * The lines of the file as an array of strings.
      */
-    private ArrayList<String> lines;
+    private final String[] lines;
     /**
      * Creates a new FileHandler.
      * No parameters needed.
      */
     public FileHandler () {
-        this.lines = new ArrayList<>();
+        this.lines = new String[10];
+        
+        for (int i = 0; i < this.lines.length; i++) {
+            this.lines[i] = "%§";
+        }
     }
     
     /**
@@ -32,16 +36,22 @@ public class FileHandler {
         File testFile = new File(filename);
         
         try (Scanner fileReader = new Scanner(testFile)) {
+            int i = 0;
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                this.lines.add(line + "\n");
+                this.lines[i] = line + "\n";
+                i++;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
     
-    public ArrayList<String> getLines() {
+    /**
+     * The lines of the file returned as an array.
+     * @return the array of lines.
+     */
+    public String[] getLines() {
         return this.lines;
     }
     

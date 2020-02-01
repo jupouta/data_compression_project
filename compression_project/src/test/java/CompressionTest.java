@@ -36,8 +36,13 @@ public class CompressionTest {
     //
     @Test
     public void countTest() {
-        ArrayList<String> testList = new ArrayList<>();
-        testList.add("kissa");
+        String[] testList = new String[5];
+        testList[0] = "k";
+        testList[1] = "i";
+        testList[2] = "s";
+        testList[3] = "s";
+        testList[4] = "a";
+        
         Compression compr = new Compression(testList);
         
         HashMap<String, Integer> freqs = compr.countFreqs();

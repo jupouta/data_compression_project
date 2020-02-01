@@ -1,11 +1,14 @@
 ### Viikkoraportti 3
 
+#### Tiivistys viikosta
+- Huffman edistyi
+- Omat rakenteeet aloitettu
+- Checkstyle ja muuta konfigurointia
 - Seuraavaksi aion
-- [ ] tehdä ohjelman loppuun
-- [ ] tehdä ohjelmalle loput yksikkötestit
-- [ ] lisätä checkstylen
-- [ ] lukea vertailtavaan algoritmiin liittyvän artikkelin
-- [ ] katsoa testikattavuudesta.
+- [ ] tehdä viimeiset osiot Huffmanista
+- [ ] tehdä lisää yksikkötestejä
+- [ ] lukea vertailtavasta algoritmista
+- jatkaa omien rakenteiden kehittämistä.
 
 
 ###### La
@@ -19,4 +22,10 @@
 - Javadocien lisäystä
 - Checkstyle ja muuta konfigurointia
 
-Käytetty tuntimäärä: 6h
+###### To
+- ArrayList to Array
+
+###### Pe
+- Suunnittelua
+
+Käytetty tuntimäärä: 7h
