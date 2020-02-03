@@ -1,9 +1,8 @@
 package tiralabra.compression_project;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import tiralabra.datastructure.MyArrayList;
 
 
 /**
@@ -16,7 +15,7 @@ public class Compression {
     */
     private PriorityQueue<Node> heap;
     private HashMap<String, Integer> hashMap;
-    private String[] lines;
+    private MyArrayList lines;
     private String decoded;
     
     /**
@@ -25,28 +24,27 @@ public class Compression {
     * @param listLines The lines in the file to be
     * compressed as an array list of lines.
     */
-    public Compression (String[] listLines) {
+    public Compression (MyArrayList listLines) {
         this.heap = new PriorityQueue<>();
         this.hashMap = new HashMap<>();
         this.lines = listLines;
     }
     
     /**
-   * Counts the times a character is included
-   * in a file.
-   * @return the hash map with the frequencies
-   *        of every character.
-   */
+     * Counts the times a character is included
+     * in a file.
+     * @return the hash map with the frequencies
+     *        of every character.
+     */
     public HashMap<String, Integer> countFreqs() {
 
-        for (int index = 0; index < this.lines.length; index++) {
-            
-            if (this.lines[index].equals("%§")) {
+        for (int index = 0; index < this.lines.length(); index++) {
+            if (this.lines.get(index) == null) {
                 break;
             }
             
-            String line = this.lines[index];
-            System.out.println(line.length());
+            String line = "" + this.lines.get(index);
+
             for (int i = 0; i < line.length(); i++) {
                 String newChar = "" + line.charAt(i);
 

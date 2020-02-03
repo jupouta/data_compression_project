@@ -7,6 +7,7 @@ import java.util.Scanner;
 import tiralabra.compression_project.Compression;
 import tiralabra.compression_project.FileHandler;
 import tiralabra.compression_project.Node;
+import tiralabra.datastructure.MyArrayList;
 
 
 public class NewMain {
@@ -21,9 +22,15 @@ public class NewMain {
         FileHandler fileHandler = new FileHandler();
         fileHandler.readFile(filename);
         
-        String[] fileLines = fileHandler.getLines();
+        Object[] fileLines = fileHandler.getLines();
+
+        MyArrayList arrayLines = new MyArrayList();
+        for (int i = 0; i < fileLines.length; i++) {
+            arrayLines.add(fileLines[i]);
+        }
         
-        Compression compr = new Compression(fileLines);
+        Compression compr = new Compression(arrayLines);
+        
         compr.countFreqs();
         compr.addFreqs();
         

@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tiralabra.datastructure;
 
-/**
- *
- * @author jultsi
- */
+import tiralabra.compression_project.Node;
+
+
 public class MyPrioQueue {
+    
+    private MyArrayList nodesList;
+    
+    public MyPrioQueue () {
+        this.nodesList = new MyArrayList();
+    }
+    
+    public void addNode(Node node) {
+        this.nodesList.add(node);
+    }
     
 }

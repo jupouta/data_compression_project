@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import tiralabra.compression_project.Compression;
 import java.util.HashMap;
 import org.junit.After;
@@ -8,6 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tiralabra.datastructure.MyArrayList;
 
 
 public class CompressionTest {
@@ -36,14 +36,14 @@ public class CompressionTest {
     //
     @Test
     public void countTest() {
-        String[] testList = new String[5];
-        testList[0] = "k";
-        testList[1] = "i";
-        testList[2] = "s";
-        testList[3] = "s";
-        testList[4] = "a";
+        MyArrayList arrayList = new MyArrayList();
+        arrayList.add("k");
+        arrayList.add("i");
+        arrayList.add("s");
+        arrayList.add("s");
+        arrayList.add("a");
         
-        Compression compr = new Compression(testList);
+        Compression compr = new Compression(arrayList);
         
         HashMap<String, Integer> freqs = compr.countFreqs();
         int k = freqs.get("k");
@@ -54,5 +54,20 @@ public class CompressionTest {
         assertEquals(i, 1);
         assertEquals(s, 2);
         assertEquals(a, 1);
+    }
+    
+    @Test
+    public void arrayListTest() {
+        MyArrayList newList = new MyArrayList();
+        for (int i = 1; i < 15; i++) {
+            newList.add("" + i);
+        }
+        
+        Object[] lines = newList.getLines();
+        String[] compare = {"1","2","3","4","5","6","7","8","9","10","11","12",
+            "13","14", null, null, null, null, null, null};
+        
+        assertEquals(20, lines.length);
+        assertArrayEquals(compare, lines);
     }
 }
