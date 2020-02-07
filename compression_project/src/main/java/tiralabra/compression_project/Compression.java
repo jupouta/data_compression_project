@@ -4,87 +4,71 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 import tiralabra.datastructure.MyArrayList;
 
-
 /**
  * The compression to be made.
  */
 public class Compression {
-    
+
     /**
-    * All the data structures needed in the compression.
-    */
-    private PriorityQueue<Node> heap;
-    private HashMap<String, Integer> hashMap;
-    private MyArrayList lines;
-    private String decoded;
-    
-    /**
-    * Creates a new Compression with the given list
-    * of lines found in a file.
-    * @param listLines The lines in the file to be
-    * compressed as an array list of lines.
-    */
-    public Compression (MyArrayList listLines) {
-        this.heap = new PriorityQueue<>();
-        this.hashMap = new HashMap<>();
-        this.lines = listLines;
-    }
-    
-    /**
-     * Counts the times a character is included
-     * in a file.
-     * @return the hash map with the frequencies
-     *        of every character.
+     * All the data structures needed in the compression.
      */
-    public HashMap<String, Integer> countFreqs() {
+    private PriorityQueue<Node> heap;
+    private int[] freq;
 
-        for (int index = 0; index < this.lines.length(); index++) {
-            if (this.lines.get(index) == null) {
-                break;
-            }
-            
-            String line = "" + this.lines.get(index);
+    /**
+     * Creates a new Compression with the given list of lines found in a file.
+     */
+    public Compression() {
+        this.heap = new PriorityQueue<>();
+        this.freq = new int[256];
+    }
 
-            for (int i = 0; i < line.length(); i++) {
-                String newChar = "" + line.charAt(i);
-
-                if (this.hashMap.containsKey(newChar)) {
-                    this.hashMap.put(newChar, this.hashMap.get(newChar)+1);
-                } else {
-                    this.hashMap.put(newChar, 1);
-                }
+    /**
+     * Counts the times a character is included in a file.
+     */
+    public void countFreqs(String[] lines) {
+        for (String l : lines) {
+            for (char c : l.toCharArray()) {
+                int asciiCode = (int) c;
+                freq[asciiCode] += 1;
+                //System.out.println(c + ":" + asciiCode + " = " + freq[asciiCode]);
             }
         }
-
-        return this.hashMap;
     }
 
-    
+
     /**
-     * Adds the counted frequencies to the
-     * priority queue.
+     * Adds the counted frequencies to the priority queue.
      */
     public void addFreqs() {
-        for (String key: this.hashMap.keySet()) {
-            heap.add(new Node(key, this.hashMap.get(key)));
-        }
-        
-        while (!heap.isEmpty()) {
-            if (heap.size() == 1) {
-                System.out.println("done");
-                System.out.println(heap.peek());
-                break;
+        for (int i = 0; i < this.freq.length; i++) {
+            char c = (char) i;
+            int f = this.freq[i];
+            if (f == 0) {
+                continue;
             }
-            Node first = heap.poll();
-            System.out.println("the first: " + first);
-            Node second = heap.poll();
-            System.out.println("the second: " + second);
-            
-            String newChar = first.getChar() + second.getChar();
-            Node newNode = new Node(newChar, first.getCount()+second.getCount());
-            System.out.println("the new one: " + newNode);
-            
-            heap.add(newNode);
+            Node n = new Node("" + c, f);
+            this.heap.add(n);
+        }
+    }
+    
+    public void treeify() {
+        while (!this.heap.isEmpty()) {
+            if (this.heap.size() == 1) {
+                Node king = heap.poll();
+                System.out.println("YOU WON");
+                // käy rekursiivisesti läpi vasemmalle ja oikealle
+                // ota mukaan noden character niin pitkälle kuin pääsee
+                return;
+            }
+            Node n1 = heap.poll();
+            Node n2 = heap.poll();
+
+            Node n3 = new Node(n1.character + n2.character, n1.count + n2.count);
+            n3.left = n1;
+            n3.right = n2;
+            System.out.println(n3.character + ": " + n3.count);
+            this.heap.add(n3);
         }
     }
     

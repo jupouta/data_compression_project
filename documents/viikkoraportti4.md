@@ -5,5 +5,14 @@
 - Omien rakenteiden testausta
 - Toinen algoritmi
 
+###### Ti
+- Omia tietorakenteita
 
-Käytetty tuntimäärä: 3h
+###### Ke
+- Java stuff
+- Koodia
+
+###### Pe
+- Muokkausta
+
+Käytetty tuntimäärä: 6,5h

@@ -36,7 +36,7 @@ public class CompressionTest {
     //
     @Test
     public void countTest() {
-        MyArrayList arrayList = new MyArrayList();
+        MyArrayList arrayList = new MyArrayList(String.class);
         arrayList.add("k");
         arrayList.add("i");
         arrayList.add("s");
@@ -58,16 +58,16 @@ public class CompressionTest {
     
     @Test
     public void arrayListTest() {
-        MyArrayList newList = new MyArrayList();
+        MyArrayList newList = new MyArrayList(String.class);
         for (int i = 1; i < 15; i++) {
             newList.add("" + i);
         }
         
-        Object[] lines = newList.getLines();
+        Object[] lines = newList.toArray();
         String[] compare = {"1","2","3","4","5","6","7","8","9","10","11","12",
             "13","14", null, null, null, null, null, null};
         
-        assertEquals(20, lines.length);
+        assertEquals(14, );
         assertArrayEquals(compare, lines);
     }
 }
