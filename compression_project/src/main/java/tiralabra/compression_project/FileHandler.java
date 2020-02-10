@@ -49,5 +49,9 @@ public class FileHandler {
     public String[] getLines() {
         return this.lines.toArray();
     }
+    
+    public void writeFile() {
+        
+    }
 
 }
