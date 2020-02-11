@@ -1,3 +1,5 @@
+package tiralabra.datastructure;
+
 
 import tiralabra.compression_project.Node;
 
