@@ -18,12 +18,13 @@ public class MyArrayList<T> {
         @SuppressWarnings("unchecked")
         final T[] a = (T[]) Array.newInstance(c, this.bound);
         this.lista = a;
-        items = 0;
+        this.items = 0;
     }
 
     @Override
     public String toString() {
-        return "MyArrayList{" + "lista=" + lista + ", items=" + items + ", bound=" + bound + '}';
+        return "MyArrayList{" + "lista=" + this.lista + ", items=" + this.items
+                + ", bound=" + this.bound + '}';
     }
 
     public T get(int index) {

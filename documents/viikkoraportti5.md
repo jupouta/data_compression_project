@@ -1,11 +1,15 @@
-### Viikkoraportti 4
+### Viikkoraportti 5
 
 ###### La
 - Dokumentaatioita
 
-
 ###### Ma
 - Rekursio algoritmiin
-- Toisesta artikkelista tietoa
+- Toisesta algoritmista tietoa
 
-Käytetty tuntimäärä: 1,5h
+###### Ti
+- Algoritmia
+- Lisätty yksikkötestejä
+
+
+Käytetty tuntimäärä: 3h

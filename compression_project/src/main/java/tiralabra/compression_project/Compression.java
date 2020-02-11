@@ -1,5 +1,6 @@
 package tiralabra.compression_project;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import tiralabra.datastructure.MyArrayList;
@@ -14,6 +15,7 @@ public class Compression {
      */
     private PriorityQueue<Node> heap;
     public int[] freq;
+    private String[] code;
 
     /**
      * Creates a new Compression with the given list of lines found in a file.
@@ -21,6 +23,7 @@ public class Compression {
     public Compression() {
         this.heap = new PriorityQueue<>();
         this.freq = new int[256];
+        this.code = new String[256];
     }
 
     /**
@@ -77,11 +80,19 @@ public class Compression {
     public void recursion(Node node, String code) {
         if (node.left == null) {
             System.out.println(node.character + ": " + code);
+            char nodeChar = node.character.charAt(0);
+            int asciiCode = (int) nodeChar;
+            
+            this.code[asciiCode] = code;
             return;
         }
         
         if (node.right == null) {
             System.out.println(node.character + ": " + code);
+            char nodeChar = node.character.charAt(0);
+            int asciiCode = (int) nodeChar;
+            
+            this.code[asciiCode] = code;
             return;
         }
         
