@@ -11,6 +11,7 @@ public class MyArrayList<T> {
     int items;
     int bound;
     Class<T> typeClass;
+    
 
     public MyArrayList(Class<T> c) {
         this.typeClass = c;
@@ -19,6 +20,7 @@ public class MyArrayList<T> {
         final T[] a = (T[]) Array.newInstance(c, this.bound);
         this.lista = a;
         this.items = 0;
+        
     }
 
     @Override
@@ -38,7 +40,7 @@ public class MyArrayList<T> {
      * @param elem the string to be added in the array.
      */
     public void add(T elem) {
-        lista[this.items] = elem;
+        this.lista[this.items] = elem;
         this.items++;
 
         if (this.items >= this.bound) {
@@ -51,7 +53,6 @@ public class MyArrayList<T> {
                 a[i] = this.lista[i];
             }
             this.lista = a;
-
         }
     }
 
@@ -66,4 +67,5 @@ public class MyArrayList<T> {
         }
         return a;
     }
+    
 }

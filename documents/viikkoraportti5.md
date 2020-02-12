@@ -10,6 +10,9 @@
 ###### Ti
 - Algoritmia
 - Lisätty yksikkötestejä
+- Toista algoritmia
 
+###### Ke
+- Prioriteettijonoa
 
-Käytetty tuntimäärä: 3h
+Käytetty tuntimäärä: 8,5h
