@@ -22,6 +22,11 @@ public class NewMain {
         compr.countFreqs(fileLines);
         compr.addFreqs();
         compr.treeify();
+        String bitString = compr.linesToBits();
+        System.out.println(bitString);
+        
+        String decompressed = compr.decompress(bitString);
+        System.out.println(decompressed);
     }
 
 }

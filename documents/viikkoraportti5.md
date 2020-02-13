@@ -16,7 +16,9 @@
 - Prioriteettijonoa
 
 ###### To
-- (https://courses.cs.washington.edu/courses/cse143x/15au/lectures/huffman/huffman.pdf)
+- https://courses.cs.washington.edu/courses/cse143x/15au/lectures/huffman/huffman.pdf
 - Prioriteettijono: poll
+- File bittijonoksi
+- Dekompressointi
 
-Käytetty tuntimäärä: 10h
+Käytetty tuntimäärä: 11,5h

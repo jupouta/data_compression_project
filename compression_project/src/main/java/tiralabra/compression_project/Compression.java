@@ -9,13 +9,11 @@ import tiralabra.datastructure.MyPrioQueue;
  * The compression to be made.
  */
 public class Compression {
-
-    /**
-     * All the data structures needed in the compression.
-     */
     private MyPrioQueue heap;
     public int[] freq;
     private String[] code;
+    private String[] fileLines;
+    private Node king;
 
     /**
      * Creates a new Compression with the given list of lines found in a file.
@@ -30,6 +28,7 @@ public class Compression {
      * Counts the times a character is included in a file.
      */
     public void countFreqs(String[] lines) {
+        this.fileLines = lines;
         for (String l : lines) {
             for (char c : l.toCharArray()) {
                 int asciiCode = (int) c;
@@ -55,10 +54,14 @@ public class Compression {
         }
     }
     
+    /**
+     * Make a heap of the frequencies.
+     */
     public void treeify() {
         while (!this.heap.isEmpty()) {
             if (this.heap.size() == 1) {
-                Node king = heap.poll();
+                Node kingNode = heap.poll();
+                this.king = kingNode;
                 System.out.println("YOU WON");
                 
                 recursion(king.left, "0");
@@ -99,6 +102,64 @@ public class Compression {
         recursion(node.left, code + "0");
         recursion(node.right, code + "1");
     }
+    
+    public String linesToBits() {
+        String coded = "";
+        
+        for (String line: this.fileLines) {
+            for (char c : line.toCharArray()) {
+                int asciiCode = (int) c;
+                coded += this.code[asciiCode];
+                System.out.println(this.code[asciiCode]);
+            }
+        }
+        
+        return coded;
+    }
+    
+    public String decompress(String compressed) {
+        Node node = this.king;
+        
+        String decompressed = "";
+        
+        int i = 0;
+        
+        while (i < compressed.length()) {
+            char c = compressed.charAt(i);
+            if (c == '0') {
+                
+                if (node.left == null) {
+                    decompressed += node.character;
+                    node = this.king;
+                    continue;
+                }
+                
+                if (i == compressed.length()-1) {
+                    decompressed += node.left.character;
+                    break;
+                }
+                node = node.left;
+            } else if (c == '1') {
+                
+                if (node.right == null) {
+                    decompressed += node.character;
+                    node = this.king;
+                    continue;
+                }
+                
+                if (i == compressed.length()-1) {
+                    decompressed += node.right.character;
+                    break;
+                }
+                
+                node = node.right;
+            }
+            i++;
+        }
+        
+        return decompressed;
+    }
+
     
     
     public MyPrioQueue getHeap() {
