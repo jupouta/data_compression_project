@@ -93,6 +93,19 @@ public class ArrayListTest {
         String index = theList.get(2);
         
         assertEquals(index, "just to be sure,");
+    }
+    
+    @Test
+    public void arrayListTest() {
+        MyArrayList newList = new MyArrayList(String.class);
+        for (int i = 1; i < 15; i++) {
+            newList.add("" + i);
+        }
         
+        Object[] lines = newList.toArray();
+        String[] compare = {"1","2","3","4","5","6","7","8","9","10","11","12",
+            "13","14"};
+        
+        assertArrayEquals(compare, lines);
     }
 }

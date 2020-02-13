@@ -15,37 +15,26 @@ public class MyPrioQueue {
      * The index to start from.
      * If a node is deleted, the index moves one to the right.
      */
-    public int index;
+    //public int index;
     
     /**
      * The length of the array.
      * This bound tells if the array needs to be doubled.
      */
     private int bound;
-    /**
-     * The index of the last node in the array.
-     * The bound can be smaller than the actual length of the array.
-     */
-    public int rightBound;
 
     public MyPrioQueue() {
         this.nodesList = new Node[10];
-        this.nodesList[0] = new Node("0", 0);
-
-        this.index = 0;
-        this.rightBound = 0;
         this.bound = 10;
-        this.items++;
     }
 
     public void addNode(Node newNode) {
-        this.rightBound++;
-        this.nodesList[this.rightBound] = newNode;
+        this.nodesList[this.items] = newNode;
         this.items++;
 
         
         // the sorting part
-        for (int i = this.rightBound; i > this.index; i--) {
+        for (int i = this.items-1; i > 0; i--) {
             if (this.nodesList[i].count < this.nodesList[i-1].count) {
                 Node bigger = this.nodesList[i-1];
                 Node smaller = this.nodesList[i];
@@ -61,7 +50,7 @@ public class MyPrioQueue {
             }
         }
         
-        if ((this.rightBound+1 >= this.bound) || (this.items >= this.bound)) {
+        if ((this.items >= this.bound)) {
             this.bound *= 2;
             Node[] a = new Node[this.bound];
             
@@ -79,21 +68,18 @@ public class MyPrioQueue {
     }
     
     public Node poll() {
-        if (this.index == 0) {
-            this.index = 1;
+        Node polled = this.nodesList[0];
+        for (int i = 1; i < this.items; i++) {
+            Node left = this.nodesList[i];
+            this.nodesList[i-1] = left;
+            this.nodesList[i] = null;
         }
-        
-        Node polled = this.nodesList[this.index];
-        this.nodesList[this.index] = null;
-        
-        this.index++;
         this.items--;
         
         return polled;
     }
     
     public boolean isEmpty() {
-        if (this.index == this.rightBound) return true;
         return this.items == 0;
     }
 

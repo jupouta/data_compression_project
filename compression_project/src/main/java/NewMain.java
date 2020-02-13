@@ -18,14 +18,6 @@ public class NewMain {
 
         String[] fileLines = fileHandler.getLines();
 
-        /*
-        Compression compr = new Compression(arrayLines);
-        
-        compr.countFreqs();
-        compr.addFreqs();
-        
-        PriorityQueue<Node> heap = compr.getHeap();
-         */
         Compression compr = new Compression();
         compr.countFreqs(fileLines);
         compr.addFreqs();

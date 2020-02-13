@@ -13,7 +13,6 @@ public class Compression {
     /**
      * All the data structures needed in the compression.
      */
-    //private PriorityQueue<Node> heap;
     private MyPrioQueue heap;
     public int[] freq;
     private String[] code;
@@ -22,7 +21,6 @@ public class Compression {
      * Creates a new Compression with the given list of lines found in a file.
      */
     public Compression() {
-        //this.heap = new PriorityQueue<>();
         this.heap = new MyPrioQueue();
         this.freq = new int[256];
         this.code = new String[256];
@@ -65,19 +63,11 @@ public class Compression {
                 
                 recursion(king.left, "0");
                 recursion(king.right, "1");
-                
                 return;
             }
             
-            System.out.println(Arrays.toString(this.heap.nodesList));
-            System.out.println("items: " + this.heap.items);
-            System.out.println("index: " + this.heap.index);
-            System.out.println("right bound: " + this.heap.rightBound);
-            
             Node n1 = heap.poll();
             Node n2 = heap.poll();
-            System.out.println(n1);
-            System.out.println(n2);
 
             Node n3 = new Node(n1.character + n2.character, n1.count + n2.count);
             n3.left = n1;

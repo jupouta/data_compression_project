@@ -15,4 +15,8 @@
 ###### Ke
 - Prioriteettijonoa
 
-Käytetty tuntimäärä: 8,5h
+###### To
+- (https://courses.cs.washington.edu/courses/cse143x/15au/lectures/huffman/huffman.pdf)
+- Prioriteettijono: poll
+
+Käytetty tuntimäärä: 10h
