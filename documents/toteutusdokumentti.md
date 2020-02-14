@@ -1,7 +1,13 @@
 ## Toteutusdokumentti
 
-- Ohjelman yleisrakenne
-- Saavutetut aika- ja tilavaativuudet (m.m. O-analyysit pseudokoodista)
-- Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
-- Työn mahdolliset puutteet ja parannusehdotukset
-- Lähteet
+##### Ohjelman yleisrakenne
+- luokat
+- miten luokat yhteydessä toisiinsa
+
+##### Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
+
+##### Suorituskyky- ja O-analyysivertailu
+
+##### Työn mahdolliset puutteet ja parannusehdotukset
+
+##### Lähteet

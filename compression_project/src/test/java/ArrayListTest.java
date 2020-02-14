@@ -9,25 +9,6 @@ import tiralabra.datastructure.MyArrayList;
 
 public class ArrayListTest {
 
-    public ArrayListTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
     @Test(timeout = 1000)
     public void add100() {
         MyArrayList<Integer> theList = new MyArrayList(Integer.class);

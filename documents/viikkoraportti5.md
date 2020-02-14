@@ -21,4 +21,7 @@
 - File bittijonoksi
 - Dekompressointi
 
-Käytetty tuntimäärä: 11,5h
+###### Pe
+- Dokumentaatiota
+
+Käytetty tuntimäärä: 12,5h

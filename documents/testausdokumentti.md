@@ -1,7 +1,14 @@
 ## Testausdokumentti
 
-- Mitä on testattu, miten tämä tehtiin
-- Minkälaisilla syötteillä testaus tehtiin (vertailupainotteisissa töissä tärkeää)
-- Miten testit voidaan toistaa
-- Ohjelman toiminnan empiirisen testauksen tulosten esittäminen graafisessa muodossa.
-- Testaus on ideaalitapauksessa suoritettava ohjelma. Tällöin testi on helposti toistettavissa, mikä helpottaa toteutuksen tekoa jo varhaisessa vaiheessa. Javalla tehdyissä töissä on erittäin suositeltavaa käyttää testaukseen JUnitia.
+##### Mitä on testattu, miten testaus tehtiin
+Ohjelmaa on testattu yksikkötesteillä. Yksikkötestaavat ohjelmassa toteutettuja luokkia ja niiden toimivuutta. Yksikkötesteissä on pyritty mahdollisimman tarkasti testaamaan erilaisia tapauksia, jotta nähdään, toimiiko ohjelma oikein ja tarpeeksi nopeasti.
+
+Järjestelmätestausta on toteutettu manuaalisesti.
+
+###### Vertailua algoritmien välillä
+
+##### Miten testit voidaan toistaa
+
+
+
+##### Graafnen esitys testauksen tuloksista

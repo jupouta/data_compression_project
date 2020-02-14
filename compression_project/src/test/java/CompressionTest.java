@@ -1,13 +1,7 @@
 
 import tiralabra.compression_project.Compression;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.datastructure.MyArrayList;
-
 
 public class CompressionTest {
 
@@ -29,6 +23,23 @@ public class CompressionTest {
         assertEquals(list[asciiCodeI], 1);
         assertEquals(list[asciiCodeS], 2);
         assertEquals(list[asciiCodeA], 1);
+    }
+    
+    @Test
+    public void testAString() {
+        String string = "dabdccadadad";
+        String[] lines = new String[1];
+        lines[0] = string;
+        
+        Compression compr = new Compression();
+        compr.countFreqs(lines);
+        compr.addFreqs();
+        compr.treeify();
+        String bitString = compr.linesToBits();
+        String decompressed = compr.decompress(bitString);
+        
+        assertEquals("0111000101101110110110", bitString);
+        assertEquals(string, decompressed);
     }
     
 }
