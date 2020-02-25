@@ -35,11 +35,13 @@ public class CompressionTest {
         compr.countFreqs(lines);
         compr.addFreqs();
         compr.treeify();
-        String bitString = compr.linesToBits();
-        String decompressed = compr.decompress(bitString);
+        String[] bitString = compr.linesToBits();
+        String[] decompressed = compr.decompress(bitString);
         
-        assertEquals("0111000101101110110110", bitString);
-        assertEquals(string, decompressed);
+        String[] test = {"0111000101101110110110"};
+        
+        assertArrayEquals(test, bitString);
+        assertEquals(string, decompressed[0]);
     }
     
 }
