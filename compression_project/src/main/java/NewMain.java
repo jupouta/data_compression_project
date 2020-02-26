@@ -9,6 +9,7 @@ import java.util.Scanner;
 import tiralabra.compression_project.Compression;
 import tiralabra.compression_project.FileHandler;
 import tiralabra.compression_project.LZCompression;
+import tiralabra.datastructure.MyArrayList;
 
 public class NewMain {
 
@@ -57,10 +58,13 @@ public class NewMain {
 
         LZCompression lzComp = new LZCompression();
         String text = "badadadabaab";
-        ArrayList<byte[]> compressedText = lzComp.compress(text);
-        for (byte[] item: compressedText) {
-            System.out.println(Arrays.toString(item));
+        MyArrayList<Integer> compressedText = lzComp.compress(text);
+        for (Integer item: compressedText.toArray()) {
+            System.out.println(item);
         }
+        //for (String item: compressedText.toArray()) {
+        //    System.out.println(item);
+        //}
     }
 
 }

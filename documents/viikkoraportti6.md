@@ -22,4 +22,7 @@
 ###### Ti
 - Toinen algo
 
-Käytetty tuntimäärä: 11,5h
+###### Ke
+- LZW
+
+Käytetty tuntimäärä: 17,5h

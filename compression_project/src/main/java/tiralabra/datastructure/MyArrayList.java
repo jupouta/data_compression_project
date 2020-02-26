@@ -30,6 +30,7 @@ public class MyArrayList<T> {
     }
 
     public T get(int index) {
+        if (index > this.items) return null;
         return this.lista[index];
     }
 
