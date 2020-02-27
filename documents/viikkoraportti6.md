@@ -25,4 +25,8 @@
 ###### Ke
 - LZW
 
-Käytetty tuntimäärä: 17,5h
+###### To
+- Hash
+- Testejä
+
+Käytetty tuntimäärä: 20,5h

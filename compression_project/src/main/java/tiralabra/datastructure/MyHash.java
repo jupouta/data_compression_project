@@ -1,28 +1,31 @@
 
 package tiralabra.datastructure;
 
+import java.util.Arrays;
+
 
 
 public class MyHash {
-    boolean[] theList;
+    public String[] theList;
     int items;
-    int bound;
+    long bound;
+    long limit;
     
-    public MyHash(int limit) {
-        this.bound = limit;
-        this.theList = new boolean[this.bound];
+    public MyHash() {
+        this.limit = 100000000l;
+        this.bound = 100000000l;
+        this.theList = new String[(int) this.bound];
         this.items = 0;
     }
     
     public void add(String elem) {
-        int hashCode = this.hashCode(elem);
-        System.out.println(hashCode);
-        this.theList[hashCode] = true;
+        long hashCode = this.hashCode(elem);
+        this.theList[(int) hashCode] = elem;
         this.items++;
 
         if ((this.items >= this.bound)) {
             this.bound *= 2;
-            boolean[] a = new boolean[this.bound];
+            String[] a = new String[(int) this.bound];
             
             // copy
             for (int i = 0; i < this.items; i++) {
@@ -30,22 +33,25 @@ public class MyHash {
             }
             this.theList = a;
         }
+
     }
     
     
-    public int hashCode(String elem) {
-        int number = 0;
+    public long hashCode(String elem) {
+        long number = 0l;
         
         for (int i = 0; i < elem.length(); i++) {
             int ascii = (int) elem.charAt(i);
             
-            number += ascii * (Math.pow(7, elem.length()-1+i));
+            number += (ascii * (Math.pow(7, elem.length()-1+i)));
         }
         
-        return number;
+        return (long) number % this.limit;
+    }
+    
+    public boolean contains(String elem) {
+        if (this.theList[(int) this.hashCode(elem)] != null) return true;
+        return false;
     }
 
-    
-    
-    
 }

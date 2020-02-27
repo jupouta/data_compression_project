@@ -13,5 +13,6 @@ Huffmanin algoritmilla toteutettu ohjelmalla aikaan saatu tiedosto on noin 1/4 a
 -
 
 ##### Työn mahdolliset puutteet ja parannusehdotukset
+- Mahdollisia ongelmia hashayksessä
 
 ##### Lähteet
