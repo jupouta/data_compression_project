@@ -29,4 +29,7 @@
 - Hash
 - Testejä
 
-Käytetty tuntimäärä: 20,5h
+###### Pe
+- LZW
+
+Käytetty tuntimäärä: 23h

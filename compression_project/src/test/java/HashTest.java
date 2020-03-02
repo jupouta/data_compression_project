@@ -39,6 +39,18 @@ public class HashTest {
         assertEquals(100000000, hashList.theList.length);
     }
     
+    @Test(timeout = 10000)
+    public void addMore() {
+        MyHash hashList = new MyHash();
+        
+        for (int i = 0; i < 10000000; i++) {
+            hashList.add("" + i);
+            assertEquals(true, hashList.contains("" + i));
+        }
+        
+        
+    }
+    
     @Test
     public void hashContains() {
         MyHash hashList = new MyHash();

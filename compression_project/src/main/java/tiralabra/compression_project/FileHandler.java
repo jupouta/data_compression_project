@@ -22,7 +22,7 @@ public class FileHandler {
      * Creates a new FileHandler. No parameters needed.
      */
     public FileHandler() {
-        this.lines = new MyArrayList<String>(String.class);
+        this.lines = new MyArrayList<>(String.class);
     }
 
     /**
@@ -56,8 +56,6 @@ public class FileHandler {
     public void writeFile(String fileName, String[] lines) throws IOException {
         FileWriter fileWriter = new FileWriter(fileName + "_compressed");
         try (PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            //printWriter.print("Some String");
-            //printWriter.printf("Product name is %s and its price is %d $", "iPhone", 1000);
             for (int i = 0; i < lines.length; i++) {
                 printWriter.print(lines[i]);
             }

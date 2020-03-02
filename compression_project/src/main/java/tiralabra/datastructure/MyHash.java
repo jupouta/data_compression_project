@@ -1,52 +1,53 @@
 
 package tiralabra.datastructure;
 
-import java.util.Arrays;
-
-
 
 public class MyHash {
     public String[] theList;
     int items;
-    long bound;
-    long limit;
+    int bound;
+    int limit;
     
     public MyHash() {
-        this.limit = 100000000l;
-        this.bound = 100000000l;
-        this.theList = new String[(int) this.bound];
+        this.limit = 100000000;
+        this.bound = 100000000;
+        this.theList = new String[this.bound];
         this.items = 0;
     }
     
     public void add(String elem) {
-        long hashCode = this.hashCode(elem);
-        this.theList[(int) hashCode] = elem;
+        
+        int hashCode = this.hashCode(elem);
+        this.theList[hashCode] = elem;
         this.items++;
 
-        if ((this.items >= this.bound)) {
-            this.bound *= 2;
-            String[] a = new String[(int) this.bound];
-            
-            // copy
-            for (int i = 0; i < this.items; i++) {
-                a[i] = this.theList[i];
-            }
-            this.theList = a;
-        }
+//        if ((this.items >= this.bound)) {
+//            this.bound *= 2;
+//            String[] a = new String[(int) this.bound];
+//            
+//            // copy
+//            for (int i = 0; i < this.items; i++) {
+//                a[i] = this.theList[i];
+//            }
+//            this.theList = a;
+//        }
 
     }
     
     
-    public long hashCode(String elem) {
-        long number = 0l;
+    public int hashCode(String elem) {
+        int number = 0;
+        int elemLength = elem.length();
+
         
-        for (int i = 0; i < elem.length(); i++) {
+        for (int i = 0; i < elemLength; i++) {
             int ascii = (int) elem.charAt(i);
             
-            number += (ascii * (Math.pow(7, elem.length()-1+i)));
+            number += (ascii * (Math.pow(2.0, elemLength-1+i)));
         }
         
-        return (long) number % this.limit;
+        return number % this.limit;
+        
     }
     
     public boolean contains(String elem) {
@@ -54,4 +55,8 @@ public class MyHash {
         return false;
     }
 
+    @Override
+    public String toString(){
+        return theList.toString();
+    }
 }

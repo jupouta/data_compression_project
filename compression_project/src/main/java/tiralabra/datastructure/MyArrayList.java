@@ -15,7 +15,7 @@ public class MyArrayList<T> {
 
     public MyArrayList(Class<T> c) {
         this.typeClass = c;
-        this.bound = 10;
+        this.bound = 1000;
         @SuppressWarnings("unchecked")
         final T[] a = (T[]) Array.newInstance(c, this.bound);
         this.lista = a;
