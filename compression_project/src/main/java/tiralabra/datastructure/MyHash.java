@@ -38,7 +38,6 @@ public class MyHash {
     public int hashCode(String elem) {
         int number = 0;
         int elemLength = elem.length();
-
         
         for (int i = 0; i < elemLength; i++) {
             int ascii = (int) elem.charAt(i);

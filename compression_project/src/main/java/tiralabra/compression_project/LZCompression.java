@@ -1,16 +1,30 @@
 package tiralabra.compression_project;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import tiralabra.datastructure.MyArrayList;
 import tiralabra.datastructure.MyHash;
 
+/**
+ * The compression to be made by using the LZW algorithm.
+ */
 public class LZCompression {
+    
+    /**
+     * The code which helps to decompress the compressed file.
+     * This variable holds the strings of characters that don't have
+     * an ASCII code.
+     */
+    private MyArrayList<String> code;
+    
+    public LZCompression() {
+        this.code = new MyArrayList<>(String.class);
+    }
 
-    public MyArrayList<String> compress3(String[] lines) {
+    public MyArrayList<String> compress(String l) {
         MyHash myHashSet = new MyHash();
         //HashSet<String> myHashSet = new HashSet<>();
         MyArrayList<String> encoding = new MyArrayList<>(String.class);
-        String l = String.join("\n", lines);
 
         // alustus
         for (char c : l.toCharArray()) {
@@ -20,22 +34,18 @@ public class LZCompression {
             }
         }
 
+        int index = 256;
         // window
         for (int i = 0; i < l.length(); i++) {
 
             // TODO: consider last.
-            System.out.println(i);
-
             for (int j = i; j < l.length(); j++) { // askel
 
                 String window = l.substring(i, j);
-               
 
                 if (window.length() == 0) {
                     continue;
                 }
-
-                //System.out.println("win: " + window);
 
                 if (myHashSet.contains(window)) {
                     continue;
@@ -44,166 +54,41 @@ public class LZCompression {
 
                     String prev = window.substring(0, window.length() - 1);
 
-                    if (prev.length() == 1) { // single character
-                        encoding.add(prev + "|" + (int) prev.charAt(0));
+                    if (prev.length() == 1) { // single character (with ascii)
+                        encoding.add((int) prev.charAt(0) + "");
                     } else {
-                        encoding.add(prev + "|" + encoding.length());
+                        encoding.add(index + "");
+                        code.add(prev);     // string of characters without ascii
+                        index++;
                     }
                     i = j - 1;
 
                 }
             }
-
         }
-
 
         return encoding;
     }
-
-    public MyArrayList<String> compress2(String[] text) {
-        MyHash myDict = new MyHash();
-
-        String[] charArray = new String[1000000];
-        // charArrayn koon muuttaminen + koon valitseminen
-
-        for (int i = 0; i < text.length; i++) {
-            for (int ind = 0; ind < text[i].length(); ind++) {
-                myDict.add(text[i].charAt(ind) + "");
-
-                int asciiCode = (int) text[i].charAt(ind);
-                charArray[asciiCode] = text[i].charAt(ind) + "";
+    
+    public String decompress(String lines) {
+        // TODO: change this
+        String[] linesSplit = lines.split("\\|");
+        
+        MyArrayList listDecomp = new MyArrayList<>(String.class);
+        
+        for (String line: linesSplit) {
+            int number = Integer.parseInt(line);
+            if (number < 256) { // ascii
+                char c = (char) number;
+                listDecomp.add("" + c);
+            } else { // strings with no ascii (strings len > 1)
+                String c = this.code.get(number-256);
+                listDecomp.add(c);
             }
         }
-
-        System.out.println("alustus done..");
-
-        MyArrayList<String> newCode = new MyArrayList<>(String.class);
-        int indForCharCode = 256;
-
-        String p = text[0].charAt(0) + "";
-        for (int index = 0; index < text.length; index++) {
-
-            for (int i = 0; i < text[index].length(); i++) {
-
-                String c = text[index].charAt(i) + "";
-                //System.out.println("index: " + index + ", i: " + i + ", c: " + c);
-
-                if (myDict.contains(p + c)) {
-                    p = p + c;
-                } else {
-                    charArray[indForCharCode] = p;
-
-                    if (p.length() == 1) {
-                        int asciiP = (int) p.charAt(0);
-                        //System.out.println("added: " + p.charAt(0));
-                        newCode.add(asciiP + ",");
-                    } else {
-                        //System.out.println("added: " + p);
-                        newCode.add(indForCharCode + ",");
-                        indForCharCode++;
-                    }
-
-                    myDict.add(p + c);
-
-                    p = c;
-                }
-
-            }
-
-            p = p + "\n";
-
-            if (index == text.length - 1) {
-                System.out.println("the last one");
-                charArray[indForCharCode] = p;
-
-                if (p.length() == 1) {
-                    int asciiP = (int) p.charAt(0);
-                    //System.out.println("added: " + p.charAt(0));
-                    newCode.add(asciiP + ",");
-
-                } else {
-                    //System.out.println("added: " + p);
-                    newCode.add(indForCharCode + ",");
-                }
-            }
-
-        }
-
-        return newCode;
-    }
-
-    public MyArrayList<String> compress(String[] text) {
-        //HashSet<String> dict = new HashSet<>();
-        MyHash myDict = new MyHash();
-
-        String[] charArray = new String[1000000];
-        // charArrayn koon muuttaminen + koon valitseminen
-
-        for (int i = 0; i < text.length; i++) {
-            for (int ind = 0; ind < text[i].length(); ind++) {
-                //dict.add(text.charAt(i) + "");
-                myDict.add(text[i].charAt(ind) + "");
-
-                int asciiCode = (int) text[i].charAt(ind);
-                charArray[asciiCode] = text[i].charAt(ind) + "";
-            }
-        }
-
-        MyArrayList<String> newCode = new MyArrayList<>(String.class);
-        int indForCharCode = 256;
-
-        String p = text[0].charAt(0) + "";
-        for (int index = 0; index < text.length; index++) {
-            int i = 1;
-
-            //System.out.println(p);
-            char[] charsOfLine = text[index].toCharArray();
-
-            while (i < text[index].length()) {
-                String c = charsOfLine[i] + "";
-                //String c = text[index].charAt(i) + "";
-                //System.out.println("index: " + index + ", i: " + i + ", c: " + c);
-
-                if (myDict.contains(p + c)) {
-                    p = p + c;
-                } else {
-                    charArray[indForCharCode] = p;
-
-                    if (p.length() == 1) {
-                        int asciiP = (int) p.charAt(0);
-                        newCode.add(asciiP + ",");
-                    } else {
-                        newCode.add(indForCharCode + ",");
-                        indForCharCode++;
-                    }
-
-                    //dict.add(p+c);
-                    myDict.add(p + c);
-
-                    p = c;
-                }
-
-                i++;
-                p = p + "\n";
-
-            }
-
-            if (index == text.length - 1) {
-                System.out.println("the last one");
-                charArray[indForCharCode] = p;
-
-                if (p.length() == 1) {
-                    int asciiP = (int) p.charAt(0);
-                    newCode.add(asciiP + ",");
-
-                } else {
-                    newCode.add(indForCharCode + ",");
-                }
-            }
-
-        }
-
-        return newCode;
+        
+        String returnS = String.join("", (String[]) listDecomp.toArray());
+        return returnS;
     }
 
 }

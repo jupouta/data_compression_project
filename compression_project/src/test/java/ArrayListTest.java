@@ -77,6 +77,14 @@ public class ArrayListTest {
     }
     
     @Test
+    public void testGetNull() {
+        MyArrayList<String> theList = new MyArrayList(String.class);
+        
+        String get = theList.get(0);
+        assertEquals(get, null);
+    }
+    
+    @Test
     public void arrayListTest() {
         MyArrayList newList = new MyArrayList(String.class);
         for (int i = 1; i < 15; i++) {

@@ -15,7 +15,7 @@ public class MyArrayList<T> {
 
     public MyArrayList(Class<T> c) {
         this.typeClass = c;
-        this.bound = 1000;
+        this.bound = 100;
         @SuppressWarnings("unchecked")
         final T[] a = (T[]) Array.newInstance(c, this.bound);
         this.lista = a;
@@ -44,8 +44,14 @@ public class MyArrayList<T> {
         this.lista[this.items] = elem;
         this.items++;
 
+        // if array list too small
         if (this.items >= this.bound) {
             this.bound *= 2;
+            
+            // I wasn't able to accept any data type (strings, integers, etc.),
+            // which is the reason why this Array method is used.
+            // Other solution would have been to make this array list only
+            // for strings. Then there wouldn't have been any need for this.
             @SuppressWarnings("unchecked")
             final T[] a = (T[]) Array.newInstance(this.typeClass, this.bound);
 

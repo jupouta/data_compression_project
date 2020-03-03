@@ -1,35 +1,11 @@
 
-import java.util.Arrays;
+
 import tiralabra.datastructure.MyPrioQueue;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import tiralabra.compression_project.Node;
 
 public class PrioQueuTest {
-
-    public PrioQueuTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testAddOrder() {
@@ -101,7 +77,6 @@ public class PrioQueuTest {
         assertEquals(5, prioQ.size());
         
         Node polled = prioQ.poll();
-        System.out.println(Arrays.toString(prioQ.nodesList));
  
         assertEquals(4, prioQ.size());
         assertEquals(1, polled.count);
@@ -122,7 +97,6 @@ public class PrioQueuTest {
         assertEquals(4, prioQ.size());
         
         Node polled2 = prioQ.poll();
-        System.out.println(Arrays.toString(prioQ.nodesList));
         
         assertEquals(3, prioQ.size());
         assertEquals(1, polled.count);
@@ -148,7 +122,6 @@ public class PrioQueuTest {
         assertEquals(3, prioQ.size());
         
         prioQ.addNode(new Node("100", 100));
-        System.out.println(Arrays.toString(prioQ.nodesList));
         
         assertEquals(4, prioQ.size());
         assertEquals(1, polled.count);
@@ -156,10 +129,5 @@ public class PrioQueuTest {
         
         assertEquals(2, polled2.count);
         assertEquals("100", prioQ.nodesList[prioQ.items-1].character);
-    }
-    
-    @Test
-    public void testBible() {
-        
     }
 }

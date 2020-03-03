@@ -1,5 +1,6 @@
 package tiralabra.compression_project;
 
+import java.util.Arrays;
 import tiralabra.datastructure.MyArrayList;
 import tiralabra.datastructure.MyPrioQueue;
 
@@ -8,7 +9,7 @@ import tiralabra.datastructure.MyPrioQueue;
  */
 public class HuffmanCompression {
 
-    private MyPrioQueue heap;
+    public MyPrioQueue heap;
     public int[] freq;
     private String[] code;
     private String text;
@@ -25,6 +26,7 @@ public class HuffmanCompression {
 
     /**
      * Counts the times a character is included in a file.
+     *
      * @param text The file to be compressed as a string.
      */
     public void countFreqs(String text) {
@@ -32,7 +34,6 @@ public class HuffmanCompression {
         for (char c : text.toCharArray()) {
             int asciiCode = (int) c;
             freq[asciiCode] += 1;
-            //System.out.println(c + ":" + asciiCode + " = " + freq[asciiCode]);
         }
     }
 
@@ -60,8 +61,12 @@ public class HuffmanCompression {
                 Node kingNode = heap.poll();
                 this.highestNode = kingNode;
 
-                recursion(highestNode.left, "0");
-                recursion(highestNode.right, "1");
+                if (highestNode.left != null) {
+                    recursion(highestNode.left, "0");
+                }
+                if (highestNode.right != null) {
+                    recursion(highestNode.right, "1");
+                }
                 return;
             }
 
@@ -77,15 +82,17 @@ public class HuffmanCompression {
     }
 
     /**
-     * Traverse recursively the nodes. Takes the node and
-    the code as parameters.
+     * Traverse recursively the nodes. Takes the node and the code as
+     * parameters.
+     *
      * @param node The node to be checked.
      * @param code The current code as zeroes and ones.
      */
-    // TODO: add a test to this!!
     public void recursion(Node node, String code) {
-        // if (node == null)
-        
+        if (node == null) {
+            return;
+        }
+
         if (node.left == null) {
             char nodeChar = node.character.charAt(0);
             int asciiCode = (int) nodeChar;
@@ -108,8 +115,8 @@ public class HuffmanCompression {
 
     /**
      * Convert the text to a bitlike representation.
-     * @return The compressed lines to write to a file
-     *          as a string.
+     *
+     * @return The compressed lines to write to a file as a string.
      */
     public String linesToBits() {
         MyArrayList list = new MyArrayList<>(String.class);
@@ -119,13 +126,13 @@ public class HuffmanCompression {
             list.add(this.code[asciiCode]);
         }
 
-        return String.join("", (String[])list.toArray());
+        return String.join("", (String[]) list.toArray());
     }
-    
 
     /**
-     * Go through the compressed string and add the encountered
-     * characters to an array list.
+     * Go through the compressed string and add the encountered characters to an
+     * array list.
+     *
      * @param compressed The compressed file as a string.
      * @return A string of the characters found in the heap.
      */
@@ -137,25 +144,25 @@ public class HuffmanCompression {
         int ind = 0;
         while (ind < compressed.length()) {
             char c = compressed.charAt(ind);
- 
-                if(node.left == null && node.right == null) {
-                    list.add(node.character);
-                    node = this.highestNode;
-                }
-                if(c == '0') node = node.left;
-                if(c == '1') node = node.right;
-                ind++;
-                
-                if (ind == compressed.length()) {
-                    list.add(node.character);
-                }
+
+            if (node.left == null && node.right == null) {
+                list.add(node.character);
+                node = this.highestNode;
             }
+            if (c == '0') {
+                node = node.left;
+            }
+            if (c == '1') {
+                node = node.right;
+            }
+            ind++;
 
-        return String.join("", (String[])list.toArray());
+            if (ind == compressed.length()) {
+                list.add(node.character);
+            }
+        }
+
+        return String.join("", (String[]) list.toArray());
     }
-
-    //public MyPrioQueue getHeap() {
-    //    return this.heap;
-    //}
 
 }
