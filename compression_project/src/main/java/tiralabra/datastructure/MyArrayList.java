@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 
 /**
  * The manually created array list based on the simple array data structure.
+ * @param <T> The class of the variable type used, e.g. String, Integer.
  */
 public class MyArrayList<T> {
 
@@ -11,7 +12,6 @@ public class MyArrayList<T> {
     int items;
     int bound;
     Class<T> typeClass;
-    
 
     public MyArrayList(Class<T> c) {
         this.typeClass = c;
@@ -20,7 +20,7 @@ public class MyArrayList<T> {
         final T[] a = (T[]) Array.newInstance(c, this.bound);
         this.lista = a;
         this.items = 0;
-        
+
     }
 
     @Override
@@ -30,7 +30,9 @@ public class MyArrayList<T> {
     }
 
     public T get(int index) {
-        if (index > this.items) return null;
+        if (index > this.items) {
+            return null;
+        }
         return this.lista[index];
     }
 
@@ -47,7 +49,7 @@ public class MyArrayList<T> {
         // if array list too small
         if (this.items >= this.bound) {
             this.bound *= 2;
-            
+
             // I wasn't able to accept any data type (strings, integers, etc.),
             // which is the reason why this Array method is used.
             // Other solution would have been to make this array list only
@@ -74,5 +76,5 @@ public class MyArrayList<T> {
         }
         return a;
     }
-    
+
 }

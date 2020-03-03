@@ -1,18 +1,43 @@
 ## Toteutusdokumentti
 
-##### Ohjelman yleisrakenne
-- luokat
-- miten luokat yhteydessä toisiinsa
+Ohjelma toteuttaa sekä Huffmanin että Lempel–Ziv–Welchin (LZW) kompressioalgoritmit. Ohjelmaan on toteutettu myös kompressoitujen tiedostojen dekompressointi. Dekompressointia ei kuitenkaan voi tehdä muutoin kuin suoraan kompressoinnin jälkeen, sillä dekompressointia varten tarvittavat tietorakenteet on tallennettu muistiin. Tämän toteuttaminen olisi ollut haastavaa tämän kurssin puitteissa.
 
-##### Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
+#### Huffmanin algoritmi
+Huffmanin algoritmi jakautuu seuraaviin osiin:
+- 
+- 
+- 
 
-##### Suorituskyky- ja O-analyysivertailu
-Huffmanin algoritmilla toteutettu ohjelmalla aikaan saatu tiedosto on noin 1/4 alkuperäisen tiedoston koosta. Tätä testattiin seuraavilla tiedostoilla:
-- Raamattu (4.33M, 99800 riviä --> 1.08M). Aikaa kului keskimäärin 700 millisekuntia, eli alle sekunnin. Muisti: 2726728 = 2.726728 MB ennen tiedoston lukemista, 40334056 = 40.334056 MB ennen kompressiota, 439723080 = 439.72308 MB kompression jälkeen. Luku kertoo kokonaismuistin ja vapaan muistin erotuksen.
--
--
+##### Aikavaativuus
+- Aikavaativuus O(n)
+- Pahin syöte, entropia
 
-##### Työn mahdolliset puutteet ja parannusehdotukset
-- Mahdollisia ongelmia hashayksessä
+##### Algoritmin onnistuminen
+
+#### Lempel–Ziv–Welchin (LZW) algoritmi
+Lempel-Ziv-Welchin algoritmi jakautuu seuraaviin osiin:
+- HashSetin alustus: Käydään jokainen syötteen merkki läpi ja lisätään se HashSetiin. Tämä vie aikaa O(n), jossa _n_ on syötteen koko.
+- Toisto-osio, jossa käydään läpi syötettä. Etsitään mahdollisimman pitkää merkkijonoa, joka on jo kohdattu tekstissä (eli joka löytyy HashSetistä). Kun pidempää merkkijonoa ei enää löydetä, se lisätään HashSetiin ja aletaan tarkastella merkkijonoa, joka alkaa viimeisimmän indeksin kohdalta. Sekä lisääminen että tarkistus HashSetistä vie aikaa O(1):n verran. Koska syöte käydään tässäkin läpi merkki kerrallaan, aikavaativuus on O(n).
+- Enkoodaus koostuu mahdollisimman pitkien merkkijonojen numeraalisista esityksistä: yhden merkin tapauksessa tämä on merkin ASCII-koodaus, pidempien merkkijonojen tapauksessa juoksevasta indeksinumerosta. Enkoodatut merkit tallennetaan itse tehtyyn ArrayListaan.
+- Näiden lukujen avulla dekompressoidaan kompressoitu versio. Yhtä pidempien merkkijonojen tapauksessa tarkastetaan ArrayListasta (luku-256) vastaavan indeksin paikalta, mikä merkkijono on kyseessä. Aikavaativuus on tässäkin O(n), missä _n_ on kompressoidun syötteen koko.
+- 
+
+##### Aikavaativuus
+- Aikavaativuus O(n)
+- Pahin syöte, entropia
+
+##### Algoritmin onnistuminen
+Koska algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä, se toimii parhaiten silloin, kun syötteessä on paljon toistoa ja mahdollisimman vähän entropiaa.
+
+
+#### Työn mahdolliset puutteet ja parannusehdotukset
+- Dekompressoinnin mahdollisuus aiemmin kompressoidusta tiedostosta. Tämän voisi toteuttaa tallentamalla tarvittavat tietorakenteet kompressoidun tiedoston loppuun.
+- Huffmanin algoritmissa dekompressoitu syöte on bitteinä ja niiden lukeminen tapahtuu kahdeksan bitin jonoissa. Jos luettavan tiedoston pituus ei ole jaollinen kahdeksalla, viimeisestä dekompressoidusta rivistä tulee vääränlainen.
+- HashCode on liian hidas HashSetissä LZW:ssä. Tätä voisi optimoida etsimällä paremman tavan tuottaa hashcode.
+- Syöte, jossa on yksi merkki tai jossa on vain yhtä yhtä merkkiä, ei kompressoidu Huffmanin kompressiossa. 
+
 
 ##### Lähteet
+- https://en.wikipedia.org/wiki/Lempel–Ziv–Welch
+- http://www2.cs.duke.edu/csed/curious/compression/lzw.html
+- https://en.wikipedia.org/wiki/Huffman_coding

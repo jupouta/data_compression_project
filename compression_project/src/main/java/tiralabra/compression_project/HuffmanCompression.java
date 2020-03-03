@@ -1,6 +1,5 @@
 package tiralabra.compression_project;
 
-import java.util.Arrays;
 import tiralabra.datastructure.MyArrayList;
 import tiralabra.datastructure.MyPrioQueue;
 
@@ -11,7 +10,7 @@ public class HuffmanCompression {
 
     public MyPrioQueue heap;
     public int[] freq;
-    private String[] code;
+    private final String[] code;
     private String text;
     private Node highestNode;
 
@@ -73,7 +72,8 @@ public class HuffmanCompression {
             Node n1 = heap.poll();
             Node n2 = heap.poll();
 
-            Node n3 = new Node(n1.character + n2.character, n1.count + n2.count);
+            Node n3 = new Node(n1.character + n2.character,
+                    n1.count + n2.count);
             n3.left = n1;
             n3.right = n2;
 

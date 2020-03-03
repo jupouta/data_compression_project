@@ -1,5 +1,5 @@
 # Data compression project
-A project for the course Data Structures and Algorithms (Tiralabra)
+A project for the course Data Structures and Algorithms (Tiralabra). The program takes a file and compresses it using both Huffman compression and LZW compression algorithm. The program also decompresses the compressed file.
 
 ### Documents
 - [Definition](documents/maarittelydokumentti.md)

@@ -11,7 +11,13 @@ public class Node implements Comparable<Node> {
      */
     public String character;
 
+    /**
+     * The node on the left side of the node.
+     */
     public Node left;
+    /**
+     * The node on the right side of the node.
+     */
     public Node right;
 
     /**
@@ -39,6 +45,7 @@ public class Node implements Comparable<Node> {
     }
 
     public String getChar() {
+        // TODO Should I remove these?
         return this.character;
     }
 

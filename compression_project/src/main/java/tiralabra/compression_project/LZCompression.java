@@ -9,22 +9,21 @@ import tiralabra.datastructure.MyHash;
  * The compression to be made by using the LZW algorithm.
  */
 public class LZCompression {
-    
+
     /**
-     * The code which helps to decompress the compressed file.
-     * This variable holds the strings of characters that don't have
-     * an ASCII code.
+     * The code which helps to decompress the compressed file. This variable
+     * holds the strings of characters that don't have an ASCII code.
      */
-    private MyArrayList<String> code;
-    
+    private final MyArrayList<String> code;
+
     public LZCompression() {
         this.code = new MyArrayList<>(String.class);
     }
 
-    public MyArrayList<String> compress(String l) {
+    public MyArrayList<Integer> compress(String l) {
         MyHash myHashSet = new MyHash();
         //HashSet<String> myHashSet = new HashSet<>();
-        MyArrayList<String> encoding = new MyArrayList<>(String.class);
+        MyArrayList<Integer> encoding = new MyArrayList<>(Integer.class);
 
         // alustus
         for (char c : l.toCharArray()) {
@@ -38,10 +37,14 @@ public class LZCompression {
         // window
         for (int i = 0; i < l.length(); i++) {
 
-            // TODO: consider last.
+            // TODO: consider last
+            // ongelma tulee, kun päästään j:n loppuun
+            // tällöin i = j-1 mutta ulompi looppi kasvattaa sen samaksi kuin j
+            // ja jäljelle jää vain window(j, j)
             for (int j = i; j < l.length(); j++) { // askel
 
                 String window = l.substring(i, j);
+                System.out.println(i + "+" + j + ": " + window);
 
                 if (window.length() == 0) {
                     continue;
@@ -55,38 +58,37 @@ public class LZCompression {
                     String prev = window.substring(0, window.length() - 1);
 
                     if (prev.length() == 1) { // single character (with ascii)
-                        encoding.add((int) prev.charAt(0) + "");
+                        encoding.add((int) prev.charAt(0));
                     } else {
-                        encoding.add(index + "");
-                        code.add(prev);     // string of characters without ascii
+                        encoding.add(index);
+                        code.add(prev);   // string of characters without ascii
                         index++;
                     }
                     i = j - 1;
-
                 }
             }
         }
 
         return encoding;
     }
-    
+
     public String decompress(String lines) {
         // TODO: change this
         String[] linesSplit = lines.split("\\|");
-        
+
         MyArrayList listDecomp = new MyArrayList<>(String.class);
-        
-        for (String line: linesSplit) {
+
+        for (String line : linesSplit) {
             int number = Integer.parseInt(line);
             if (number < 256) { // ascii
                 char c = (char) number;
                 listDecomp.add("" + c);
             } else { // strings with no ascii (strings len > 1)
-                String c = this.code.get(number-256);
+                String c = this.code.get(number - 256);
                 listDecomp.add(c);
             }
         }
-        
+
         String returnS = String.join("", (String[]) listDecomp.toArray());
         return returnS;
     }

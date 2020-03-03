@@ -24,6 +24,7 @@ public class FileHandler {
 
     /**
      * Read the lines in the given file.
+     *
      * @param filename The name of the filename. The path can be absolute or
      * relative.
      * @return The lines of the file.
@@ -45,13 +46,17 @@ public class FileHandler {
 
     /**
      * Write the compressed version of a file as bytes.
+     *
      * @param filename The name of the file.
      * @param fileString The compressed file.
      * @throws FileNotFoundException Exception when file not found.
      * @throws IOException IOException.
      */
-    public void writeByteFile(String filename, String fileString) throws FileNotFoundException, IOException {
-        try (FileOutputStream stream = new FileOutputStream(filename.substring(0, filename.length() - 4) + "_compressed.bin")) {
+    public void writeByteFile(String filename, String fileString) throws
+            FileNotFoundException, IOException {
+        try (FileOutputStream stream = new FileOutputStream(
+                filename.substring(0, filename.length() - 4)
+                + "_compressed_hff.bin")) {
             int pos = 0;
             while (pos < fileString.length()) {
                 byte nextByte = 0x00;
@@ -68,24 +73,32 @@ public class FileHandler {
 
     /**
      * Read the compressed file with bytes in it.
+     *
      * @param filename The name of the file.
+     * @param fileEnding The ending of the file name, e.g. "compress_hff.txt"
      * @return The array of bytes written from the file.
      * @throws IOException IOException.
      */
-    public byte[] readByteFile(String filename) throws IOException {
-        byte[] array = Files.readAllBytes(Paths.get(filename.substring(0, filename.length() - 4) + "_compressed.bin"));
+    public byte[] readByteFile(String filename, String fileEnding) throws IOException {
+        byte[] array = Files.readAllBytes(Paths.get(
+                filename.substring(0, filename.length() - 4)
+                + "_" + fileEnding));
         return array;
     }
 
     /**
      * Write the given lines to a file.
-     * @param filename  The name of the file.
-     * @param linesToWrite  The lines to be written.
-     * @param fileEnding    The ending part of the file, e.g. "compressed_lz.txt"
+     *
+     * @param filename The name of the file.
+     * @param linesToWrite The lines to be written.
+     * @param fileEnding The ending part of the file, e.g. "compressed_lz.txt"
      * @throws IOException IOException.
      */
-    public void writeFile(String filename, String linesToWrite, String fileEnding) throws IOException {
-        FileWriter fileWriter = new FileWriter(filename.substring(0, filename.length() - 4) + "_" + fileEnding);
+    public void writeFile(String filename, String linesToWrite,
+            String fileEnding) throws IOException {
+        FileWriter fileWriter = new FileWriter(
+                filename.substring(0, filename.length() - 4) + "_"
+                + fileEnding);
         try (PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.print(linesToWrite);
         } catch (Exception e) {

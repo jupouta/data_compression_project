@@ -15,7 +15,7 @@ public class Main {
         LZCompression lzComp = new LZCompression();
         //String[] text = {"badadadabaab"};
         MyArrayList<String> compressedText = lzComp.compress3(text);
-        */
+         */
     }
 
 }

@@ -4,10 +4,11 @@ Projektin tarkoituksena on luoda ohjelma, joka tiivistää tietoa. Ohjelma saa s
 
 Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan binääripuuta ja prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n log n).
 
-Vertailen projektissa Huffmanin algoritmia [tässä artikkelissa](https://www.cs.brandeis.edu/~dilant/cs175/%5BSiying-Dong%5D.pdf) esitettyyn algoritmiin, joka ilmeisesti [Wikipedian mukaan](https://en.wikipedia.org/wiki/VCDIFF) on nimetty VCDIFF-algoritmiksi. Joka tapauksessa algoritmi on artikkelin perusteella jalostettu versio LZ77/LZ78:sta. Kyseinen algoritmi eroaa Huffmanin algoritmista esimerkiksi siinä, että se toimii hyvin vain silloin, kun tekstissä on paljon toistoa; muulloin kompressio ei pienennä tiedostoa merkittävästi. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkirivejä.
+Vertailen projektissa Huffmanin algoritmia Lempel–Ziv–Welchin (LZW) algoritmiin. Huffmanin algoritmi perustuu merkkien kokonaisfrekvenssiin, kun taas LZW tarkastelee lokaalia toisteisuutta tekstissä. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkirivejä.
 
 ### Lähteet
 - https://en.wikipedia.org/wiki/Huffman_coding
+- https://en.wikipedia.org/wiki/Lempel–Ziv–Welch
 
 ### Mahdollisia lähteitä
 - https://csfieldguide.org.nz/en/chapters/coding-compression/huffman-coding/
