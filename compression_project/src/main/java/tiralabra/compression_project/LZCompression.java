@@ -3,7 +3,7 @@ package tiralabra.compression_project;
 import java.util.Arrays;
 import java.util.HashSet;
 import tiralabra.datastructure.MyArrayList;
-import tiralabra.datastructure.MyHash;
+import tiralabra.datastructure.MyHashSet;
 
 /**
  * The compression to be made by using the LZW algorithm.
@@ -21,8 +21,9 @@ public class LZCompression {
     }
 
     public MyArrayList<Integer> compress(String l) {
-        MyHash myHashSet = new MyHash();
-        //HashSet<String> myHashSet = new HashSet<>();
+        //MyHash myHashSet = new MyHash();
+        HashSet<String> myHashSet = new HashSet<>();
+        // the encoding for the file
         MyArrayList<Integer> encoding = new MyArrayList<>(Integer.class);
 
         // alustus
@@ -33,6 +34,7 @@ public class LZCompression {
             }
         }
 
+        /*
         int index = 256;
         // window
         for (int i = 0; i < l.length(); i++) {
@@ -44,7 +46,6 @@ public class LZCompression {
             for (int j = i; j < l.length(); j++) { // askel
 
                 String window = l.substring(i, j);
-                System.out.println(i + "+" + j + ": " + window);
 
                 if (window.length() == 0) {
                     continue;
@@ -67,8 +68,47 @@ public class LZCompression {
                     i = j - 1;
                 }
             }
+        }*/
+        
+        
+        if (l.length() == 1) {   // texts with only one char
+            encoding.add((int) l.charAt(0));
+            return encoding;
         }
 
+        int indForCharCode = 256;
+        String p = l.charAt(0) + "";
+        for (int i = 1; i < l.length(); i++) {
+
+            String c = l.charAt(i) + "";
+
+            if (myHashSet.contains(p + c)) {
+                p = p + c;
+            } else {
+                if (p.length() == 1) { // single character
+                    int asciiP = (int) p.charAt(0);
+                    encoding.add(asciiP);
+                } else { // multiple characters
+                    encoding.add(indForCharCode);
+                    code.add(p);
+                    indForCharCode++;
+                }
+
+                myHashSet.add(p + c);
+                p = c;
+            }
+
+            // add the last chars to encoding
+            if (i == l.length() - 1) {
+                if (p.length() == 1) { // single char
+                    int asciiP = (int) p.charAt(0);
+                    encoding.add(asciiP);
+                } else { // multiple characters
+                    encoding.add(indForCharCode);
+                    code.add(p);
+                }
+            }
+        }
         return encoding;
     }
 

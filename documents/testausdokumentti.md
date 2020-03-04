@@ -4,14 +4,19 @@
 - Kuinka kauan suorittaa:
 - Onnistuuko tekemään:
 - Mitä ei testata:
-Pohjoismaisia merkkejä on testattu yhdellä yksikkötestillä (joka toimii). Oletettavaa kuitenkin on, että monet erikoismerkit, mukaan lukien ääkköset, saattavat hajottaa ohjelman, erityisesti Huffmanin algoritmin, joka perustuu merkkien ASCII-koodauksessa vastaavaan kokonaislukuun.
-Tiedoston avaamista ja sen toimintaa ei testata, koska voidaan olettaa, että Javan omat funktiot toimivat oikein.
+  - Pohjoismaisia merkkejä on testattu yhdellä yksikkötestillä (joka toimii). Oletettavaa kuitenkin on, että monet erikoismerkit, mukaan lukien ääkköset, saattavat hajottaa ohjelman, erityisesti Huffmanin algoritmin, joka perustuu merkkien ASCII-koodauksessa vastaavaan kokonaislukuun.
 
-Testitapaukset
+  - Erilaisia tiedostotyyppejä ei ole testattu tai otettu huomioon. Ohjelmaa on testattu merkkijonoilla ja tekstitiedostoilla.
+
+  - Tiedoston avaamista ja sen toimintaa ei testata, koska voidaan olettaa, että Javan omat funktiot toimivat oikein.
+
+#### Testitapaukset
 
 
 #### Huffman
 ##### Saman kirjaimen toisto
+
+##### Saman ilmaisun toisto
 
 ##### Täysin satunnainen
 
@@ -21,9 +26,13 @@ Testitapaukset
 #### LZW
 ##### Saman kirjaimen toisto
 
+##### Saman ilmaisun toisto
+Nähdään, että tässä toimii parhaiten.
+
 ##### Täysin satunnainen
 
 ##### Raamattu
+LZW tuottaa lähes saman kuin Huffman.
 
 
 #### Automaattiset raportit

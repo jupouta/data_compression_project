@@ -1,39 +1,47 @@
 
-import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.datastructure.MyHash;
+import tiralabra.datastructure.MyHashSet;
 
 
-public class HashTest {
+public class HashSetTest {
 
     @Test
     public void addOne() {
-        MyHash hashList = new MyHash();
+        MyHashSet hashList = new MyHashSet();
         hashList.add("a");
         
         assertEquals(true, hashList.contains("a"));
-        assertEquals(100000000, hashList.theList.length);
     }
     
-    @Test(timeout = 5000)
-    public void addMore() {
-        MyHash hashList = new MyHash();
+    @Test
+    public void addSame() {
+        MyHashSet hashList = new MyHashSet();
         
-        for (int i = 0; i < 10000000; i++) {
-            hashList.add("" + i);
-            //assertEquals(true, hashList.contains("" + i));
+        for (int i = 0; i < 1000000; i++) {
+            hashList.add("esim");
         }
+        
+        assertEquals(true, hashList.contains("esim"));
+        assertEquals(false, hashList.contains("not"));
+    }
+    
+    @Test(timeout = 10000)
+    public void addMore() {
+        MyHashSet hashList = new MyHashSet();
+        
+        for (int i = 1; i < 100000; i++) {
+            hashList.add("num"+ (i-100));
+        }
+        
+        assertEquals(true, hashList.contains("" + 1));
+        assertEquals(true, hashList.contains("" + 5));
+        assertEquals(true, hashList.contains("" + 1000));
     }
     
     @Test
     public void hashContains() {
-        MyHash hashList = new MyHash();
-
+        MyHashSet hashList = new MyHashSet();
         hashList.add("an example");
         hashList.add("another example");
         hashList.add("it continues");
