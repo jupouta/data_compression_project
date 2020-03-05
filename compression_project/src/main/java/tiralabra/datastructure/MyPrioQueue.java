@@ -1,7 +1,5 @@
 package tiralabra.datastructure;
 
-import tiralabra.compression_project.Node;
-
 public class MyPrioQueue {
 
     public Node[] nodesList;
@@ -10,11 +8,6 @@ public class MyPrioQueue {
      */
     public int items;
 
-    /**
-     * The index to start from. If a node is deleted, the index moves one to the
-     * right.
-     */
-    //public int index;
     /**
      * The length of the array. This bound tells if the array needs to be
      * doubled.

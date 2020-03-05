@@ -1,3 +1,5 @@
+package tiralabra.datastructure;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -83,6 +85,23 @@ public class ArrayListTest {
         String get = theList.get(0);
         assertEquals(get, null);
     }
+    
+    @Test
+    public void testGetNullWithWrongIndex() {
+        MyArrayList<String> theList = new MyArrayList(String.class);
+        theList.add("item");
+        theList.add("and another");
+        
+        String get = theList.get(3);
+        assertEquals(get, null);
+    }
+    
+    @Test
+    public void testLength2() {
+        MyArrayList<String> theList = new MyArrayList(String.class);
+        assertEquals(0, theList.length());
+    }
+      
     
     @Test
     public void arrayListTest() {

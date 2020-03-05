@@ -1,5 +1,6 @@
 package tiralabra.compression_project;
 
+import tiralabra.datastructure.Node;
 import tiralabra.datastructure.MyArrayList;
 import tiralabra.datastructure.MyPrioQueue;
 

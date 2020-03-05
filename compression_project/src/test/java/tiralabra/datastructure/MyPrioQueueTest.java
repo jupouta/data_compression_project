@@ -1,11 +1,13 @@
+package tiralabra.datastructure;
+
 
 
 import tiralabra.datastructure.MyPrioQueue;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.compression_project.Node;
+import tiralabra.datastructure.Node;
 
-public class PrioQueuTest {
+public class MyPrioQueueTest {
 
     @Test
     public void testAddOrder() {
@@ -53,6 +55,8 @@ public class PrioQueuTest {
         }
 
         assertEquals(12, prioQ.size());
+        assertEquals(12, prioQ.items);
+        assertEquals(20, prioQ.nodesList.length);
     }
 
     @Test(timeout = 1000)

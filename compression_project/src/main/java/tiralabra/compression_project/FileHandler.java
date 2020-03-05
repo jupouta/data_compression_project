@@ -32,7 +32,7 @@ public class FileHandler {
     public MyArrayList<String> readFile(String filename) {
         File file = new File(filename);
         System.out.println("Original file size: " + (file.length() / 1024) + " kb");
-        
+
         MyArrayList<String> lines = new MyArrayList<>(String.class);
 
         try (Scanner fileReader = new Scanner(file)) {
@@ -52,18 +52,19 @@ public class FileHandler {
      *
      * @param filename The name of the file.
      * @param fileString The compressed file that includes bytes.
+     * @return The division needed later for byte counting.
      * @throws FileNotFoundException Exception when file not found.
      * @throws IOException IOException.
      */
-    public void writeHffByteFile(String filename, String fileString) throws
+    public int writeHffByteFile(String filename, String fileString) throws
             FileNotFoundException, IOException {
         File file = new File(filename.substring(0, filename.length() - 4)
                 + "_compressed_hff.bin");
-        
+
+        int division = fileString.length() % 8; // 1 byte = 8 bits
+
         try (FileOutputStream stream = new FileOutputStream(file)) {
             int pos = 0;
-            // TODO: tänne jonnekin se ehto siitä, että saa selville,
-            // kuinka paljon jäi yli
             while (pos < fileString.length()) {
                 byte nextByte = 0x00;
                 // takes the eight characters
@@ -75,8 +76,11 @@ public class FileHandler {
                 pos += 8;
             }
         }
-        System.out.println("Compressed file size (Huffman): " +
-                (file.length() / 1024) + " kb");
+
+        System.out.println("Compressed file size (Huffman): "
+                + (file.length() / 1024) + " kb");
+
+        return division;
     }
 
     /**
@@ -106,16 +110,16 @@ public class FileHandler {
             String fileEnding) throws IOException {
         File file = new File(filename.substring(0, filename.length() - 4) + "_"
                 + fileEnding);
-        
+
         FileWriter fileWriter = new FileWriter(file);
         try (PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.print(linesToWrite);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        
-        System.out.println("Decompressed file size: " + (file.length() / 1024) +
-                " kb");
+
+        System.out.println("Decompressed file size: " + (file.length() / 1024)
+                + " kb");
     }
 
 }

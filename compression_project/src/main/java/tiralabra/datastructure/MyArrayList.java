@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 
 /**
  * The manually created array list based on the simple array data structure.
+ *
  * @param <T> The class of the variable type used, e.g. String, Integer.
  */
 public class MyArrayList<T> {

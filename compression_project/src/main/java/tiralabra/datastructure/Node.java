@@ -1,4 +1,4 @@
-package tiralabra.compression_project;
+package tiralabra.datastructure;
 
 /**
  * Represents the node in a binary tree. The node includes the character and its

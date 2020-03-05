@@ -1,7 +1,9 @@
+package tiralabra.datastructure;
+
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.compression_project.Node;
+import tiralabra.datastructure.Node;
 
 
 public class NodeTest {
@@ -33,4 +35,13 @@ public class NodeTest {
         
         assertEquals(-1, result);
     }
+    
+    @Test
+    public void testToString() {
+        Node node = new Node("a", 1);
+        String result = "a: 1";
+        
+        assertEquals(result, node.toString());
+    }
+    
 }

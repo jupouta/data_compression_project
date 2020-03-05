@@ -1,3 +1,5 @@
+package tiralabra.compression_project;
+
 
 import java.util.Arrays;
 import tiralabra.compression_project.HuffmanCompression;

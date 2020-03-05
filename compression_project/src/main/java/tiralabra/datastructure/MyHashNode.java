@@ -1,16 +1,13 @@
-
 package tiralabra.datastructure;
 
-public class HashNode<String> {
-    
+public class MyHashNode<String> {
+
     // K int, V string
     String value;
-    HashNode<String> next;
-    
-    public HashNode(String value, HashNode<String> next) {
+    MyHashNode<String> next;
+
+    public MyHashNode(String value, MyHashNode<String> next) {
         this.value = value;
         this.next = next;
     }
 }
-    
-

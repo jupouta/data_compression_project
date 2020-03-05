@@ -18,11 +18,13 @@ public class Gui {
     private String filename;
     private HuffmanCompression huffmanCompr;
     private LZCompression lzCompr;
+    private int divisionForHuff;
 
     public Gui(Scanner scanner) {
         this.scanner = scanner;
         this.fileHandler = new FileHandler();
         this.filename = "";
+        this.divisionForHuff = 0;
     }
 
     public void start() throws IOException {
@@ -38,10 +40,10 @@ public class Gui {
         huffmanCompress(s);
         System.out.println("Huffman compression done!");
         System.out.println("-----");
-        //huffmanDecompress();
+        huffmanDecompress();
         System.out.println("Huffman decompression done!");
         System.out.println("-----");
-        
+
         lzCompr = new LZCompression();
         System.out.println("Starting LZW compression..");
         lzCompress(s);
@@ -59,26 +61,35 @@ public class Gui {
         huffmanCompr.treeify();
 
         String bitString = huffmanCompr.linesToBits();
-
-        fileHandler.writeHffByteFile(filename, bitString);
+        divisionForHuff = fileHandler.writeHffByteFile(filename, bitString);
 
     }
 
     public void huffmanDecompress() throws IOException {
         byte[] array = fileHandler.readByteFile(filename, "compressed_hff.bin");
 
-        // TODO korjaa tämä arrayksi
+        //System.out.println(divisionForHuff);
         MyArrayList<String> binaryToString = new MyArrayList<>(String.class);
-        String asd = "";
-        for (byte b : array) {
-            binaryToString.add(String.format("%8s", Integer.toBinaryString(b & 0xFF))
-                    .replace(' ', '0'));
-            //asd += String.format("%8s", Integer.toBinaryString(b & 0xFF))
-            //        .replace(' ', '0');
+        for (int i = 0; i < array.length; i++) {
+            byte b = array[i];
+            String asBS = null;
+            String formatted = null;
+
+            if (i == array.length - 1 && this.divisionForHuff != 0) { // last
+                asBS = Integer.toBinaryString((b & 0xFF) << (8 - this.divisionForHuff));
+                //System.out.println(String.format("%8s", Integer.toBinaryString((b & 0xFF)<<2)).replace(' ', '0'));
+                formatted = String.format("%8s", asBS).replace(' ', '0');
+                formatted = formatted.substring(0, this.divisionForHuff);
+            } else {
+                asBS = Integer.toBinaryString(b & 0xFF);
+                formatted = String.format("%8s", asBS).replace(' ', '0');
+            }
+            binaryToString.add(formatted);
         }
 
-        // TODO: sen verran kuin jäi yli pitää katsoa ennen dekompressointia
         String joined = String.join("", binaryToString.toArray());
+        //System.out.println(joined);
+        //System.out.println(joined.substring(joined.length() - 16));
         String decompressed = huffmanCompr.decompress(joined);
         fileHandler.writeFile(filename, decompressed, "decompressed_hff.txt");
     }
@@ -93,22 +104,22 @@ public class Gui {
             // take every number and convert it to bytes
             for (int i = 0; i < compressedText.length(); i++) {
                 int num = compressedText.get(i);
-                
+
                 byte[] result = intToByteArray(num);
                 stream.write(result);
             }
         }
-        System.out.println("Compressed file size (LZW): " +
-                (file.length() / 1024) + " kb");
+        System.out.println("Compressed file size (LZW): "
+                + (file.length() / 1024) + " kb");
 
         //String s = String.join("|", (String[]) compressedText.toArray());
         //fileHandler.writeFile(filename, s, "compressed_lz.txt");
-
     }
 
     /**
-     * Convert the given integer into a byte array that represents a
-     * 32-bit number.
+     * Convert the given integer into a byte array that represents a 32-bit
+     * number.
+     *
      * @param num The integer to be converted.
      * @return The array of bytes in the given integer.
      */

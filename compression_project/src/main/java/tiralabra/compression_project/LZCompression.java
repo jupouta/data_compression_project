@@ -69,8 +69,6 @@ public class LZCompression {
                 }
             }
         }*/
-        
-        
         if (l.length() == 1) {   // texts with only one char
             encoding.add((int) l.charAt(0));
             return encoding;

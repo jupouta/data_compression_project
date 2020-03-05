@@ -9,40 +9,26 @@ public class MyHashSet {
      * The list of elements as nodes in a linked list. Every node points to
      * another in a key (index) of the list.
      */
-    public HashNode<String>[] theList;
+    public MyHashNode<String>[] theList;
     int items;
     int bound;
 
     public MyHashSet() {
         this.bound = 10;
-        this.theList = new HashNode[this.bound];
+        this.theList = new MyHashNode[this.bound];
         this.items = 0;
     }
 
     public void add(String value) {
+        
+        growList();     // make sure the list is big enough
 
-        // make the list bigger if bound is met
-        if (this.items == this.bound) {
-            this.bound *= 2;
-
-            HashNode<String>[] prev = this.theList;
-            this.theList = new HashNode[this.bound];
-
-            // copy
-            for (HashNode<String> node : prev) {
-                while (node != null) {
-                    add(node.value);
-                    node = node.next;
-                }
-            }
-        }
-
-        HashNode<String> entry = new HashNode<>(value, null);
+        MyHashNode<String> entry = new MyHashNode<>(value, null);
 
         int hCode = this.hashCode(value);
         int placing = hCode % this.bound;
 
-        HashNode<String> givenNode = theList[placing];
+        MyHashNode<String> givenNode = theList[placing];
 
         if (givenNode == null) {
             theList[placing] = entry;
@@ -55,12 +41,30 @@ public class MyHashSet {
 
                 givenNode = givenNode.next;
             }
-            //if (givenNode.key.equals(key)) {
-            //    givenNode.value = value;
-            //} else {
+
             givenNode.next = entry;
             items++;
-            //}
+        }
+    }
+    
+    /**
+     * Make the list bigger if bound is met, i.e. the bound is as big
+     * as the item count.
+     */
+    public void growList() {
+        if (this.items == this.bound) {
+            this.bound *= 2;
+
+            MyHashNode<String>[] prev = this.theList;
+            this.theList = new MyHashNode[this.bound];
+
+            // copy
+            for (MyHashNode<String> node : prev) {
+                while (node != null) {
+                    add(node.value);
+                    node = node.next;
+                }
+            }
         }
     }
 
@@ -79,7 +83,7 @@ public class MyHashSet {
 
     /**
      * Count the hash code for a specific string. Represents the internal hash
-     * code.
+     * code for an object.
      *
      * @param elem The string element for which to count the hash code.
      * @return The hash code as an integer value.
@@ -104,15 +108,8 @@ public class MyHashSet {
      * @param value The string that we want to check.
      * @return True or false if the string is included in the array.
      */
-    /*
-    public boolean contains(String elem) {
-        if (this.theList[(int) this.hashCode(elem) % this.bound] != null) {
-            return true;
-        }
-        return false;
-    }*/
     public boolean contains(String value) {
-        HashNode<String> bucket = this.theList[hashCode(value) % this.bound];
+        MyHashNode<String> bucket = this.theList[hashCode(value) % this.bound];
 
         while (bucket != null) {
             if (value.equals(bucket.value)) {
