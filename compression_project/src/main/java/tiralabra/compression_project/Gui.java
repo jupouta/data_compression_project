@@ -3,6 +3,7 @@ package tiralabra.compression_project;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Scanner;
 import tiralabra.datastructure.MyArrayList;
@@ -32,13 +33,21 @@ public class Gui {
         this.filename = scanner.nextLine();
 
         MyArrayList<String> fileLines = fileHandler.readFile(filename);
+        if (fileLines.length() == 0) {
+            return;
+        }
+        
         String s = String.join("\n", (String[]) fileLines.toArray());
 
         huffmanCompr = new HuffmanCompression();
         System.out.println("-----");
         System.out.println("Starting Huffman compression..");
+        long timestampBeginn = System.currentTimeMillis();
         huffmanCompress(s);
+        long timestampAfter = System.currentTimeMillis();
+        double result = (timestampAfter - timestampBeginn / 1000);
         System.out.println("Huffman compression done!");
+        System.out.println("Time spent: " + result);
         System.out.println("-----");
         huffmanDecompress();
         System.out.println("Huffman decompression done!");
@@ -46,8 +55,12 @@ public class Gui {
 
         lzCompr = new LZCompression();
         System.out.println("Starting LZW compression..");
+        long timeStampLZ = System.currentTimeMillis();
         lzCompress(s);
+        long timeStampLZAfter = System.currentTimeMillis();
         System.out.println("LZW compression done!");
+        System.out.println("Time spent: " + 
+                ((timeStampLZAfter - timeStampLZ) / 1000));
         System.out.println("-----");
         System.out.println("Starting LZW decompression..");
 

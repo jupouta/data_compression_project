@@ -10,12 +10,6 @@ public class Main {
         Scanner reader = new Scanner(System.in);
         Gui gui = new Gui(reader);
         gui.start();
-
-        /*
-        LZCompression lzComp = new LZCompression();
-        //String[] text = {"badadadabaab"};
-        MyArrayList<String> compressedText = lzComp.compress3(text);
-         */
     }
 
 }

@@ -6,7 +6,7 @@ Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan tietorakenteena prio
 
 Vertailen projektissa Huffmanin algoritmia Lempel–Ziv–Welchin (LZW) algoritmiin. LZW:ssä tarvitaan tietorakenteena taulukkolistojen lisäksi hajautustaulua. LZW:n aikavaativuus on O(n).
 
-Huffmanin algoritmi perustuu merkkien kokonaisfrekvenssiin, kun taas LZW tarkastelee lokaalia toisteisuutta tekstissä. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkirivejä.
+Huffmanin algoritmi perustuu merkkien kokonaisfrekvenssiin, kun taas LZW tarkastelee lokaalia toisteisuutta tekstissä. Vertailussa keskitytään sekä nopeuteen että tehokkuuteen (tiivistäminen). Käytän vertailuun jotakin vapaasti saatavaa kirjaa sekä itse luotuja merkkijonoja.
 
 ### Lähteet
 - https://en.wikipedia.org/wiki/Huffman_coding

@@ -1,28 +1,40 @@
 ## Toteutusdokumentti
 
+- [x] Ohjelman yleisrakenne
+- [ ] Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
+- [ ] Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
+- [ ] Työn mahdolliset puutteet ja parannusehdotukset
+- [ ] Lähteet
+
 Ohjelma toteuttaa sekä Huffmanin että Lempel–Ziv–Welchin (LZW) kompressioalgoritmit. Ohjelmaan on toteutettu myös kompressoitujen tiedostojen dekompressointi. Dekompressointia ei kuitenkaan voi tehdä muutoin kuin suoraan kompressoinnin jälkeen, sillä dekompressointia varten tarvittavat tietorakenteet on tallennettu muistiin. Tämän toteuttaminen olisi ollut haastavaa tämän kurssin puitteissa.
 
-#### Ohjelman rakenne
+Syötteenä sallitaan tekstitiedostot. Ainakin Huffmanin algoritmi toimii teoriassa muillekin tiedostotyypeille, esimerkiksi kuville, mutta ohjelmaa pitäisi hiukan muokata sitä varten (mm. tiedoston lukua).
 
+### Ohjelman rakenne
+Ohjelma koostuu kahdesta eri paketista: projektiin liittyvästä sekä tietorakenteita sisältävästä paketista. Main-tiedosto kutsuu projektipakkauksessa olevaa luokkaa Gui, joka aloittaa ohjelman. Gui kutsuu molempaa kompressiota ja dekompressiota, jotka ovat luokissa HuffmanCompression ja LZCompression. Tiedoston lukeminen tapahtuu luokan FileHandler avulla, ja sitä kutsutaan myös Guista.
 
-Syötteenä sallitaan tekstitiedostot. Ainakin Huffmanin algoritmi toimii teoriassa muillekin tiedostotyypeille, esimerkiksi kuville, mutta oletettavaa on, että ohjelmaa pitäisi muokata sitä varten.
+Datastructure-paketti pitää sisällään kaikki tietorakenneluokat. MyArrayList on itse tehty versio javan ArrayListasta, ja se sisältää ohjelmaa varten tarvittavat metodit. MyArrayListiä käytetään sekä Huffman että LZW:n kompressiossa. Node- ja MyPrioQueue-luokkia käytetään Huffmanin algoritmissa. Node on tietorakenne prioriteettijonoa varten, joka taas on osa Huffmanin algoritmia. MyHashNode ja MyHashSet ovat osa itse tehtyä versiota javan HashSetistä. MyHashSetiä käytetään LZW:n algoritmissa, ja MyHashNode tietorakenne, jota tarvitaan MyHashSetiin.
 
-#### Huffmanin algoritmi
+### Huffmanin algoritmi
+
 Huffmanin algoritmi jakautuu seuraaviin osiin:
-- 
-- 
-- 
+1. Frekvenssitaulun alustus. Ohjelma käy läpi tiedoston kaikki rivit ja laskee jokaiselle merkille kyseisen merkin frekvenssin tekstissä. Tämä vie aikaa O(n), missä _n_ on syötteen koko.
+2. Uniikit merkit asetetaan pienuusjärjestykseen prioriteettijonoon niin, että pienin merkki on ensimmäisenä jonossa. Merkit tallennetaan jonoon solmuina, joihin on tallennettu merkki sekä merkin frekvenssi. Merkkien läpikäynti vie O(m), missä _m_ on uniikkien merkkien määrä tiedostossa, ja prioriteettijonoon tallentaminen vie järjestämisen vuoksi O(log m), missä _m_ on sama merkkien määrä tiedostossa. Aikaa kuluu siis yhtesnsä O(m log m).
+3. Käy prioriteettijono läpi ottamalla pois kaksi pienimmän frekvenssin solmua. Nämä kaksi solmua yhdistetään ja luodaan uusi solmu, jolla on näiden solmujen yhteenlaskettu frekvenssi. Prioriteettijonoa käydään läpi niin pitkään kuin jonossa on solmuja. Tämä vie aikaa O(m), sillä jokainen merkki täytyy käydä läpi.
+4. Kun solmut loppuvat, otetaan viimeinen (korkeimman frekvenssin) solmu ja käydään sen molemman puolen solmut rekursiivisesti läpi. Kun solmulla ei ole vasemmalla tai oikealla puolella enää solmuja, tallennetaan taulukkoon merkkiä vastaavan ASCII-koodin mukaiseen indeksiin merkin enkoodaus. Binääripuun vuoksi aikaa kuluu O(log m).
+5. Lopuksi käydään läpi syötteen merkit ja otetaan ylös taulukosta enkoodaus kyseiselle merkille. Koska _n_ on syötteen koko, aikavaativuus on O(n).
 
-Ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston koko olisi oikeasti pienempi, ja vastaavasti bitit muutetaan jälleen takaisin numeroiksi ennen dekompressiota.
+Lisäksi ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston koko olisi oikeasti pienempi, ja vastaavasti bitit muutetaan jälleen takaisin numeroiksi ennen dekompressiota.
 
-##### Aikavaativuus
-- Aikavaativuus O(n)
-- Pahin syöte, entropia
-Pahin syöte on ainakin prioriteettijonossa sellainen, että merkit eivät jakaudu tasaisesti molemmille puolille.
+Dekompressiossa käydään läpi kompressoidun tiedoston jokainen merkki (jotka vastaavat binääripuussa olevia kaaria) ja muodostetaan niiden avulla alkuperäiset merkit.
 
-##### Algoritmin onnistuminen
+#### Aikavaativuus
+Algoritmin aikavaativuus on siis O(n).
 
-#### Lempel–Ziv–Welchin (LZW) algoritmi
+#### Algoritmin onnistuminen
+
+
+### Lempel–Ziv–Welchin (LZW) algoritmi
 Lempel-Ziv-Welchin algoritmi jakautuu seuraaviin osiin:
 1. HashSetin alustus: Käydään jokainen syötteen merkki läpi ja lisätään se HashSetiin. Tämä vie aikaa O(n), jossa _n_ on syötteen koko.
 2. Toisto-osio, jossa käydään läpi syötettä. Etsitään mahdollisimman pitkää merkkijonoa, joka on jo kohdattu tekstissä (eli joka löytyy HashSetistä). Kun pidempää merkkijonoa ei enää löydetä, se lisätään HashSetiin ja aletaan tarkastella merkkijonoa, joka alkaa viimeisimmän indeksin kohdalta. Sekä lisääminen että tarkistus HashSetistä vie aikaa O(1):n verran. Koska syöte käydään tässäkin läpi merkki kerrallaan, aikavaativuus on O(n).
@@ -31,21 +43,21 @@ Lempel-Ziv-Welchin algoritmi jakautuu seuraaviin osiin:
 
 Ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston koko olisi oikeasti pienempi, ja vastaavasti bitit muutetaan jälleen takaisin numeroiksi ennen dekompressiota.
 
-##### Aikavaativuus
+#### Aikavaativuus
 - Aikavaativuus O(n)
 - Mitä enemmän entropiaa, sitä enemmän kompressoitu tiedosto vie tilaa. Vastavuoroisesti mitä pidempi tiedosto ja mitä enemmän toistoa tiedostossa on, sitä paremmin kompressio toimii. Tämän vuoksi usein lyhyillä syötteillä kompressiota ei tapahdu ollenkaan tai kompressoitu tiedosto on jopa isompi kuin alkuperäinen tiedosto. Koska luonnollisessa kielessä on rajoitettu määrä merkkejä, toistoa tapahtuu joka tapauksessa jossain vaiheessa, ja siksi pidemmillä syötteillä saadaan mahdollisimman hyvä kompressio.
 
-##### Algoritmin onnistuminen
+#### Algoritmin onnistuminen
 Koska algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä, se toimii parhaiten silloin, kun syötteessä on paljon toistoa ja mahdollisimman vähän entropiaa.
 
 
-#### Työn mahdolliset puutteet ja parannusehdotukset
+### Työn mahdolliset puutteet ja parannusehdotukset
 - Dekompressoinnin mahdollisuus aiemmin kompressoidusta tiedostosta. Tämän voisi toteuttaa (esimerkiksi) tallentamalla tarvittavat tietorakenteet kompressoidun tiedoston loppuun.
-- Huffmanin algoritmissa dekompressoitu syöte on bitteinä ja niiden lukeminen tapahtuu kahdeksan bitin jonoissa. Jos luettavan tiedoston pituus ei ole jaollinen kahdeksalla, viimeisestä dekompressoidusta rivistä tulee vääränlainen.
-- Syöte, jossa on yksi merkki tai jossa on vain yhtä yhtä merkkiä, ei kompressoidu Huffmanin kompressiossa. 
+- Syöte, jossa on vain yhtä yhtä merkkiä (esim. 'aaa'), ei onnistu kompressoitumaan Huffmanin kompressiossa. Tämä johtuu algoritmin toiminnasta binääripuuta muodostettaessa, sillä puu
 
 
-##### Lähteet
+### Lähteet
 - https://en.wikipedia.org/wiki/Lempel–Ziv–Welch
 - http://www2.cs.duke.edu/csed/curious/compression/lzw.html
 - https://en.wikipedia.org/wiki/Huffman_coding
+- https://www.cs.auckland.ac.nz/software/AlgAnim/huffman.html

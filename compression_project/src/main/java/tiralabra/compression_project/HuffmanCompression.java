@@ -61,11 +61,11 @@ public class HuffmanCompression {
                 Node kingNode = heap.poll();
                 this.highestNode = kingNode;
 
-                if (highestNode.left != null) {
-                    recursion(highestNode.left, "0");
+                if (highestNode.getLeft() != null) {
+                    recursion(highestNode.getLeft(), "0");
                 }
-                if (highestNode.right != null) {
-                    recursion(highestNode.right, "1");
+                if (highestNode.getRight() != null) {
+                    recursion(highestNode.getRight(), "1");
                 }
                 return;
             }
@@ -73,8 +73,8 @@ public class HuffmanCompression {
             Node n1 = heap.poll();
             Node n2 = heap.poll();
 
-            Node n3 = new Node(n1.character + n2.character,
-                    n1.count + n2.count);
+            Node n3 = new Node(n1.getChar() + n2.getChar(),
+                    n1.getCount() + n2.getCount());
             n3.left = n1;
             n3.right = n2;
 
@@ -94,24 +94,24 @@ public class HuffmanCompression {
             return;
         }
 
-        if (node.left == null) {
-            char nodeChar = node.character.charAt(0);
+        if (node.getLeft() == null) {
+            char nodeChar = node.getChar().charAt(0);
             int asciiCode = (int) nodeChar;
 
             this.code[asciiCode] = code;
             return;
         }
 
-        if (node.right == null) {
-            char nodeChar = node.character.charAt(0);
+        if (node.getRight() == null) {
+            char nodeChar = node.getChar().charAt(0);
             int asciiCode = (int) nodeChar;
 
             this.code[asciiCode] = code;
             return;
         }
 
-        recursion(node.left, code + "0");
-        recursion(node.right, code + "1");
+        recursion(node.getLeft(), code + "0");
+        recursion(node.getRight(), code + "1");
     }
 
     /**
@@ -146,20 +146,20 @@ public class HuffmanCompression {
         while (ind < compressed.length()) {
             char c = compressed.charAt(ind);
 
-            if (node.left == null && node.right == null) {
-                list.add(node.character);
+            if (node.getLeft() == null && node.getRight() == null) {
+                list.add(node.getChar());
                 node = this.highestNode;
             }
             if (c == '0') {
-                node = node.left;
+                node = node.getLeft();
             }
             if (c == '1') {
-                node = node.right;
+                node = node.getRight();
             }
             ind++;
 
             if (ind == compressed.length()) {
-                list.add(node.character);
+                list.add(node.getChar());
             }
         }
 

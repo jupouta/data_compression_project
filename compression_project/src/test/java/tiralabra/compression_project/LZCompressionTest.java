@@ -3,7 +3,6 @@ package tiralabra.compression_project;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.compression_project.LZCompression;
 import tiralabra.datastructure.MyArrayList;
 
 

@@ -44,13 +44,36 @@ public class Node implements Comparable<Node> {
         return this.count - o.count;
     }
 
+    /**
+     * Returns the node's character.
+     * @return The character as a string.
+     */
     public String getChar() {
-        // TODO Should I remove these?
         return this.character;
     }
 
+    /**
+     * Returns the node's count.
+     * @return The node as an integer.
+     */
     public int getCount() {
         return this.count;
+    }
+    
+    /**
+     * Returns the node on the left side of the node.
+     * @return The node on the left-side of the node.
+     */
+    public Node getLeft() {
+        return this.left;
+    }
+    
+    /**
+     * Returns the node on the right side of the node.
+     * @return The node on the right side of the node.
+     */
+    public Node getRight() {
+        return this.right;
     }
 
     @Override

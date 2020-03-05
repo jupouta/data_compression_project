@@ -42,7 +42,6 @@ public class FileHandler {
             }
         } catch (Exception e) {
             System.out.println("File not found!");
-            System.exit(1);
         }
         return lines;
     }
