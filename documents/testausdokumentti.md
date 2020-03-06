@@ -8,7 +8,7 @@ Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa tot
 
 Testauksessa on lisäksi verrattu alkuperäisiä tiedostoja ohjelman dekompressoituihin versioihin. Tähän on käytetty unixin diff-komentoa, jolla saa tarkastettua, onko tiedostoilla mitään eroa.
 
-- Mitä ei testata:
+- Mitä ei ole testattu:
   - Pohjoismaisia merkkejä on testattu yhdellä yksikkötestillä (joka toimii). Oletettavaa kuitenkin on, että monet erikoismerkit, mukaan lukien ääkköset, saattavat hajottaa ohjelman, erityisesti Huffmanin algoritmin, joka perustuu merkkien ASCII-koodauksessa vastaavaan kokonaislukuun.
 
   - Erilaisia tiedostotyyppejä ei ole testattu tai otettu huomioon. Ohjelmaa on testattu merkkijonoilla ja tekstitiedostoilla.
@@ -16,7 +16,8 @@ Testauksessa on lisäksi verrattu alkuperäisiä tiedostoja ohjelman dekompresso
   - Tiedoston avaamista ja sen toimintaa ei testata, koska voidaan olettaa, että Javan omat funktiot toimivat oikein.
 
 ### Testitapaukset
-Testauksessa on otettu huomioon erityisesti alla olevia testitapauksia. Molemman algoritmin kohdalla on listattu tiedosto, tiedoston kompressointiin kulunut aika, tiedoston alkuperäinen koko ja kompressoidun tiedoston koko. Kompressioon kulunutta aikaa kuvaava yksikkö msek tarkoittaa millisekuntia.
+
+Testauksessa on otettu huomioon erityisesti alla olevia testitapauksia. Molemman algoritmin kohdalla on listattu tiedosto, tiedoston kompressointiin kulunut aika, tiedoston alkuperäinen koko ja kompressoidun tiedoston koko. Kompressioon kulunutta aikaa kuvaava yksikkö _msek_ tarkoittaa millisekuntia.
 
 
 #### Huffman
@@ -29,7 +30,7 @@ Testauksessa on otettu huomioon erityisesti alla olevia testitapauksia. Molemman
 
 - Saman kirjaimen/ilmauksen toisto: toisto.txt
 
-Kyseisessä tiedostossa toistetaan samaa sanaa 7200 kertaa. Alkuperäiseen tiedostoon nähden koko on pienentynyt kolmasosaan, joten algoritmi toimii varsin hyvin. Lisäksi aikaa kului todella vähän, erityisesti verrattuna LZW:hen.
+Kyseisessä tiedostossa toistetaan samaa sanaa 7200 kertaa. Alkuperäiseen tiedostoon nähden koko on pienentynyt kolmasosaan, joten algoritmi toimii varsin hyvin. Lisäksi aikaa kului vähän, ainakin verrattuna LZW:hen.
 
 - Satunnainen generoitu teksti: lorem.txt
 
@@ -40,8 +41,6 @@ Tekstiin on koottu kymmenen kappaletta generoitua lorem ipsum -tekstiä. Tiedost
 Tiedostoon on kirjattu koko Raamattu. Ohjelma toimii varsin nopeasti huolimatta siitä, että tiedosto on jo aikaisempiin verrattuna isompi. Lisäksi tiedoston koko on kompressoituna lähes puolet alkuperäistä pienempi.
 
 #### LZW
-
-Seuraavaan taulukkoon on koottu käytetyimmät testitapaukset:
 
 | Tiedostonimi | Kulunut aika | Alkuperäinen koko | Kompressoitu koko |
 | ------------- | ------------- | ------------- |------------- |
@@ -59,9 +58,8 @@ Tekstiin on koottu kymmenen kappaletta generoitua lorem ipsum -tekstiä. Koska t
 
 - Raamattu: bible.txt
 
-LZW tuottaa lähes samanlaisen tuloksen kuin Huffman, sillä kompressoidun tiedoston koko on suurin piirtein puolet alkuperäisestä. Suoritus on kuitenkin erittäin huono, sillä kompressioon kuluu noin 2 minuuttia.
+LZW tuottaa lähes samanlaisen tuloksen kuin Huffman, sillä kompressoidun tiedoston koko on suurin piirtein puolet alkuperäisestä. Suoritus on kuitenkin erittäin huono, sillä kompressioon kuluu aikaa noin 2 minuuttia.
 
 #### Yhteenveto
 
-Kun katsotaan tiedostojen kokoja, Huffman toimii tasaisesti saaden aikaan alkuperäisestä tiedostosta noin puolet pienemmän kompressoidun version. LZW taas toimii erityisen hyvin silloin, kun tiedosto on iso ja siinä on erityisen paljon toistoa eli vähän entropiaa. LZW:n tehokkuus on kuitenkin varsin huono isoilla syötteillä, mutta sitä voitaisiin parantaa esimerkiksi hashaystä parantamalla.
-
+Kun katsotaan tiedostojen kokoja, Huffman toimii tasaisesti saaden aikaan alkuperäisestä tiedostosta noin puolet pienemmän kompressoidun version. LZW taas toimii erityisen hyvin silloin, kun tiedosto on iso ja siinä on erityisen paljon toistoa eli vähän entropiaa. Pienillä tiedostoilla LZW:n käyttö voi olla tehotonta, jos kompressoitu tiedosto on jopa isompi kuin alkuperäinen. LZW:n tehokkuus on kuitenkin varsin huono isoilla syötteillä, mutta sitä voitaisiin parantaa esimerkiksi hashaystä parantamalla.
