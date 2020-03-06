@@ -18,14 +18,8 @@ Testauksessa on lisäksi verrattu alkuperäisiä tiedostoja ohjelman dekompresso
 ### Testitapaukset
 Testauksessa on otettu huomioon erityisesti alla olevia testitapauksia. Molemman algoritmin kohdalla on listattu tiedosto, tiedoston kompressointiin kulunut aika, tiedoston alkuperäinen koko ja kompressoidun tiedoston koko. Kompressioon kulunutta aikaa kuvaava yksikkö msek tarkoittaa millisekuntia.
 
-lorem.txt: 6908 b
-toisto.txt: 43559b
-bible.txt: 4332557b
 
 #### Huffman
-lorem.txt: 8 millisekuntia / 0.008 sek, 3690 b
-toisto.txt: 23 millisekuntia / 0.024 sek, 15435 b
-bible.txt: 393 millisekuntia / 0.414 sek, 2480356b
 
 | Tiedostonimi | Kulunut aika | Alkuperäinen koko | Kompressoitu koko |
 | ------------- | ------------- | ------------- |------------- |
