@@ -2,7 +2,7 @@
 
 Projektin tarkoituksena on luoda ohjelma, joka tiivistää tietoa. Ohjelma saa syötteenä tekstitiedoston, joka tiivistetään pienempään muotoon. Projektissa toteutetaan sekä tiedoston kompressointi että dekompressointi. Käytän kielenä Javaa.
 
-Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan tietorakenteena prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n).
+Toteutukseen käytän Huffmanin algoritmia, johon tarvitaan tietorakenteena mm. prioriteettijonoa. Huffmanin algoritmissa aikavaativuus on O(n).
 
 Vertailen projektissa Huffmanin algoritmia Lempel–Ziv–Welchin (LZW) algoritmiin. LZW:ssä tarvitaan tietorakenteena taulukkolistojen lisäksi hajautustaulua. LZW:n aikavaativuus on O(n).
 
