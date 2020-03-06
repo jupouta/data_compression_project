@@ -52,7 +52,7 @@ public class Gui {
         long timestampBeginn = System.currentTimeMillis();
         huffmanCompress(s);
         long timestampAfter = System.currentTimeMillis();
-        double result = ((double) timestampAfter - (double) timestampBeginn);
+        double result = (((double) timestampAfter - (double) timestampBeginn) / 1000F);
         System.out.println("Huffman compression done!");
         System.out.println("Time spent: " + result);
         System.out.println("-----");
@@ -67,7 +67,7 @@ public class Gui {
         long timeStampLZAfter = System.currentTimeMillis();
         System.out.println("LZW compression done!");
         System.out.println("Time spent: "
-                + (((double) timeStampLZAfter - (double) timeStampLZ)));
+                + (((double) timeStampLZAfter - (double) timeStampLZ) / 1000F));
         System.out.println("-----");
         System.out.println("Starting LZW decompression..");
 
@@ -99,7 +99,7 @@ public class Gui {
     public void huffmanDecompress() throws IOException {
         byte[] fileArray = fileHandler.readByteFile(filename,
                 "compressed_hff.bin");
-
+        
         MyArrayList<String> binaryToString = new MyArrayList<>(String.class);
         for (int i = 0; i < fileArray.length; i++) {
             byte bt = fileArray[i];
@@ -134,6 +134,7 @@ public class Gui {
     public void lzCompress(String text) throws IOException {
         MyArrayList<Integer> compressedText = lzCompr.compress(text);
 
+        
         File file = new File(filename.substring(0, filename.length() - 4)
                 + "_compressed_lz.bin");
         try (FileOutputStream stream = new FileOutputStream(file)) {
