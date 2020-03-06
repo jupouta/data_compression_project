@@ -1,11 +1,5 @@
 ## Toteutusdokumentti
 
-- [x] Ohjelman yleisrakenne
-- [x] Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
-- [ ] Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
-- [x] Työn mahdolliset puutteet ja parannusehdotukset
-- [ ] Lähteet
-
 Ohjelma toteuttaa sekä Huffmanin että Lempel–Ziv–Welchin (LZW) kompressioalgoritmit. Ohjelmaan on toteutettu myös kompressoitujen tiedostojen dekompressointi. Dekompressointia ei kuitenkaan voi tehdä muutoin kuin suoraan kompressoinnin jälkeen, sillä dekompressointia varten tarvittavat tietorakenteet on tallennettu muistiin. Tämän toteuttaminen olisi ollut haastavaa tämän kurssin puitteissa.
 
 Syötteenä sallitaan tekstitiedostot. Ainakin Huffmanin algoritmi toimii teoriassa muillekin tiedostotyypeille, esimerkiksi kuville, mutta ohjelmaa pitäisi hiukan muokata sitä varten (mm. tiedoston lukua).
@@ -32,6 +26,8 @@ Algoritmin aikavaativuus on siis O(n).
 
 #### Algoritmin onnistuminen
 
+Algoritmi toimii testauksen perusteella varsin nopeasti. Kompressointi saa usein aikaan tiedostoja, jotka ovat noin puolet pienempiä. Entropia ei tunnu vaikuttavan kompression tuloksiin yhtä paljon kuin LZW:ssä. Ohjelma toimii siis tasaisen hyvin eikä syöte näyttäisi vaikuttavan siihen erityisesti.
+
 
 ### Lempel–Ziv–Welchin (LZW) algoritmi
 Lempel-Ziv-Welchin algoritmi jakautuu seuraaviin osiin:
@@ -46,13 +42,13 @@ Ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston koko olisi
 
 
 #### Algoritmin onnistuminen
-Mitä enemmän entropiaa, sitä enemmän kompressoitu tiedosto vie tilaa. Vastavuoroisesti mitä pidempi tiedosto ja mitä enemmän toistoa tiedostossa on, sitä paremmin kompressio toimii, sillä algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä. Tämän vuoksi usein lyhyillä syötteillä kompressiota ei tapahdu ollenkaan tai kompressoitu tiedosto on jopa isompi kuin alkuperäinen tiedosto. Koska luonnollisessa kielessä on rajoitettu määrä merkkejä, toistoa tapahtuu joka tapauksessa jossain vaiheessa, ja siksi pidemmillä syötteillä saadaan mahdollisimman hyvä kompressio. Tämä nähdään testauksessa käytetystä toisto-tiedostosta, jossa kompressoitu versio on hyvin paljon pienempi kuin alkuperäinen.
+Mitä enemmän entropiaa, sitä enemmän kompressoitu tiedosto vie tilaa. Vastavuoroisesti mitä pidempi tiedosto ja mitä enemmän toistoa tiedostossa on, sitä paremmin kompressio toimii, sillä algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä. Tämän vuoksi usein lyhyillä syötteillä kompressiota ei tapahdu ollenkaan tai kompressoitu tiedosto on jopa isompi kuin alkuperäinen tiedosto. Koska luonnollisessa kielessä on rajoitettu määrä merkkejä, toistoa tapahtuu joka tapauksessa jossain vaiheessa, ja siksi pidemmillä syötteillä saadaan mahdollisimman hyvä kompressio. Tämä nähdään testauksessa käytetystä toisto-tiedostosta, jossa kompressoitu versio on hyvin paljon pienempi kuin alkuperäinen. Toisaalta jos katsotaan algoritmin nopeutta, itse tehdyllä HashSetillä toteutettu ohjelma ei toimi nopeasti isoilla syötteillä.
 
 
 ### Työn mahdolliset puutteet ja parannusehdotukset
 - Dekompressoinnin mahdollisuus aiemmin kompressoidusta tiedostosta. Tämän voisi toteuttaa (esimerkiksi) tallentamalla tarvittavat tietorakenteet kompressoidun tiedoston loppuun.
 - Syöte, jossa on vain yhtä yhtä merkkiä (esim. 'aaa'), ei onnistu kompressoitumaan Huffmanin kompressiossa. Tämä johtuu algoritmin toiminnasta binääripuuta muodostettaessa, sillä prioriteettijonosta otetaan pois kaksi pienintä solmua, ja jos jonossa on vain yksi solmu, tätä ei tapahdu. Tämän voisi korjata muuttamalla tarkastuksen erilaiseksi (niin että tällaista ongelmaa ei tapahtuisi), mutta aikapuutteen vuoksi se jäi puuttumaan.
-- Itse toteutettu HashSet on varsin hidas, kuten Raamatun tapauksessa nähdään selvästi. Tämä johtuu (ainakin osittain) uudelleenhashayksestä, joka pitää tehdä taulukon tullessa täyteen. Uudelleenhäshäys on kallis operaatio, koska jokainen taulukossa oleva olio (HashNode) pitää hashata uudelleen. Tätä saattaa tapahtua isoissa teksteissä useamminkin, vaikka alkurajan (taulukon koon) asettaisikin mahdollisimman suureksi. HashSetin voisi mahdollisesti vaihtaa joksikin muuksi tietorakenteeksi, joka on nopeampi, tai sitten yrittää parantaa hashaystä tehokkaammaksi.
+- Itse toteutettu HashSet on varsin hidas, kuten Raamatun tapauksessa nähdään selvästi. Tämä johtuu (ainakin osittain) uudelleenhashayksestä, joka pitää tehdä taulukon tullessa täyteen. Uudelleenhäshäys on kallis operaatio, koska jokainen taulukossa oleva olio (HashNode) pitää hashata uudelleen. Tätä saattaa tapahtua isoissa teksteissä useamminkin, vaikka alkurajan (taulukon koon) asettaisikin mahdollisimman suureksi. HashSetin voisi mahdollisesti vaihtaa joksikin muuksi tietorakenteeksi, joka on nopeampi, tai sitten yrittää parantaa hashaystä tehokkaammaksi. Lisäksi muistin kasvattaminen voi auttaa.
 
 
 ### Lähteet
