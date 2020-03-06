@@ -63,7 +63,7 @@ public class NodeTest {
     @Test
     public void testGetLeft() {
         Node node = new Node("a", 1);
-        node.left = new Node("b", 2);
+        node.setLeft(new Node("b", 2));
         
         assertFalse(node.getLeft()== null);
         assertTrue(node.getRight() == null);
@@ -72,7 +72,7 @@ public class NodeTest {
     @Test
     public void testGetRight() {
         Node node = new Node("a", 1);
-        node.right = new Node("b", 2);
+        node.setRight(new Node("b", 2));
         
         assertTrue(node.getLeft() == null);
         assertFalse(node.getRight() == null);

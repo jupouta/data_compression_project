@@ -1,9 +1,9 @@
 ## Toteutusdokumentti
 
 - [x] Ohjelman yleisrakenne
-- [ ] Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
+- [x] Saavutetut aika- ja tilavaativuudet (mm. O-analyysit pseudokoodista)
 - [ ] Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
-- [ ] Työn mahdolliset puutteet ja parannusehdotukset
+- [x] Työn mahdolliset puutteet ja parannusehdotukset
 - [ ] Lähteet
 
 Ohjelma toteuttaa sekä Huffmanin että Lempel–Ziv–Welchin (LZW) kompressioalgoritmit. Ohjelmaan on toteutettu myös kompressoitujen tiedostojen dekompressointi. Dekompressointia ei kuitenkaan voi tehdä muutoin kuin suoraan kompressoinnin jälkeen, sillä dekompressointia varten tarvittavat tietorakenteet on tallennettu muistiin. Tämän toteuttaminen olisi ollut haastavaa tämän kurssin puitteissa.
@@ -28,7 +28,6 @@ Lisäksi ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston k
 
 Dekompressiossa käydään läpi kompressoidun tiedoston jokainen merkki (jotka vastaavat binääripuussa olevia kaaria) ja muodostetaan niiden avulla alkuperäiset merkit.
 
-#### Aikavaativuus
 Algoritmin aikavaativuus on siis O(n).
 
 #### Algoritmin onnistuminen
@@ -37,23 +36,23 @@ Algoritmin aikavaativuus on siis O(n).
 ### Lempel–Ziv–Welchin (LZW) algoritmi
 Lempel-Ziv-Welchin algoritmi jakautuu seuraaviin osiin:
 1. HashSetin alustus: Käydään jokainen syötteen merkki läpi ja lisätään se HashSetiin. Tämä vie aikaa O(n), jossa _n_ on syötteen koko.
-2. Toisto-osio, jossa käydään läpi syötettä. Etsitään mahdollisimman pitkää merkkijonoa, joka on jo kohdattu tekstissä (eli joka löytyy HashSetistä). Kun pidempää merkkijonoa ei enää löydetä, se lisätään HashSetiin ja aletaan tarkastella merkkijonoa, joka alkaa viimeisimmän indeksin kohdalta. Sekä lisääminen että tarkistus HashSetistä vie aikaa O(1):n verran. Koska syöte käydään tässäkin läpi merkki kerrallaan, aikavaativuus on O(n).
+2. Toisto-osio, jossa käydään läpi syötettä. Etsitään mahdollisimman pitkää merkkijonoa, joka on jo kohdattu tekstissä (eli joka löytyy HashSetistä). Kun pidempää merkkijonoa ei enää löydetä, se lisätään HashSetiin ja aletaan tarkastella merkkijonoa, joka alkaa viimeisimmän indeksin kohdalta. Sekä lisääminen että tarkistus HashSetistä vie teoriassa aikaa O(1):n verran. Koska HashSet on linkitetty lista, se joutuu kuitenkin käymään tietyssä indeksissä olevat oliot läpi ja katsomaan, onko listassa oliota, jolla olisi kysytty merkkijono. Jos oliot ovat jakautuneet epätasaisesti listaan niin, että yhdessä indeksissä on useampi olio, aikavaativuus voi nousta jossain määrin lähelle O(n). Tämä saattaisi pahimassa tapauksessa nostaa aikavaativuuden O(n^2), koska jokaisen merkkijonon kohdalla pitäisi tarkastella vielä edeltäviä jo kohdattuja merkkijonoja. Koska tämä riippuu hyvin paljon syötteestä, aikavaativuus voidaan määrittää tässä tapauksessa O(n).
 3. Enkoodaus koostuu mahdollisimman pitkien merkkijonojen numeraalisista esityksistä: yhden merkin tapauksessa tämä on merkin ASCII-koodaus, pidempien merkkijonojen tapauksessa juoksevasta indeksinumerosta. Enkoodatut merkit tallennetaan itse tehtyyn ArrayListaan.
 4. Näiden lukujen avulla dekompressoidaan kompressoitu versio. Yhtä pidempien merkkijonojen tapauksessa tarkastetaan ArrayListasta (luku-256) vastaavan indeksin paikalta, mikä merkkijono on kyseessä. Aikavaativuus on tässäkin O(n), missä _n_ on kompressoidun syötteen koko.
 
+Algoritmin aikavaativuus on siis ainakin teoriassa O(n).
+
 Ennen kompressiota merkit muutetaan bittimuotoisiksi, jotta tiedoston koko olisi oikeasti pienempi, ja vastaavasti bitit muutetaan jälleen takaisin numeroiksi ennen dekompressiota.
 
-#### Aikavaativuus
-- Aikavaativuus O(n)
-- Mitä enemmän entropiaa, sitä enemmän kompressoitu tiedosto vie tilaa. Vastavuoroisesti mitä pidempi tiedosto ja mitä enemmän toistoa tiedostossa on, sitä paremmin kompressio toimii. Tämän vuoksi usein lyhyillä syötteillä kompressiota ei tapahdu ollenkaan tai kompressoitu tiedosto on jopa isompi kuin alkuperäinen tiedosto. Koska luonnollisessa kielessä on rajoitettu määrä merkkejä, toistoa tapahtuu joka tapauksessa jossain vaiheessa, ja siksi pidemmillä syötteillä saadaan mahdollisimman hyvä kompressio.
 
 #### Algoritmin onnistuminen
-Koska algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä, se toimii parhaiten silloin, kun syötteessä on paljon toistoa ja mahdollisimman vähän entropiaa.
+Mitä enemmän entropiaa, sitä enemmän kompressoitu tiedosto vie tilaa. Vastavuoroisesti mitä pidempi tiedosto ja mitä enemmän toistoa tiedostossa on, sitä paremmin kompressio toimii, sillä algoritmi perustuu aina mahdollisimman pitkän merkkijonon löytämiseen syötteen sisällä. Tämän vuoksi usein lyhyillä syötteillä kompressiota ei tapahdu ollenkaan tai kompressoitu tiedosto on jopa isompi kuin alkuperäinen tiedosto. Koska luonnollisessa kielessä on rajoitettu määrä merkkejä, toistoa tapahtuu joka tapauksessa jossain vaiheessa, ja siksi pidemmillä syötteillä saadaan mahdollisimman hyvä kompressio. Tämä nähdään testauksessa käytetystä toisto-tiedostosta, jossa kompressoitu versio on hyvin paljon pienempi kuin alkuperäinen.
 
 
 ### Työn mahdolliset puutteet ja parannusehdotukset
 - Dekompressoinnin mahdollisuus aiemmin kompressoidusta tiedostosta. Tämän voisi toteuttaa (esimerkiksi) tallentamalla tarvittavat tietorakenteet kompressoidun tiedoston loppuun.
-- Syöte, jossa on vain yhtä yhtä merkkiä (esim. 'aaa'), ei onnistu kompressoitumaan Huffmanin kompressiossa. Tämä johtuu algoritmin toiminnasta binääripuuta muodostettaessa, sillä puu
+- Syöte, jossa on vain yhtä yhtä merkkiä (esim. 'aaa'), ei onnistu kompressoitumaan Huffmanin kompressiossa. Tämä johtuu algoritmin toiminnasta binääripuuta muodostettaessa, sillä prioriteettijonosta otetaan pois kaksi pienintä solmua, ja jos jonossa on vain yksi solmu, tätä ei tapahdu. Tämän voisi korjata muuttamalla tarkastuksen erilaiseksi (niin että tällaista ongelmaa ei tapahtuisi), mutta aikapuutteen vuoksi se jäi puuttumaan.
+- Itse toteutettu HashSet on varsin hidas, kuten Raamatun tapauksessa nähdään selvästi. Tämä johtuu (ainakin osittain) uudelleenhashayksestä, joka pitää tehdä taulukon tullessa täyteen. Uudelleenhäshäys on kallis operaatio, koska jokainen taulukossa oleva olio (HashNode) pitää hashata uudelleen. Tätä saattaa tapahtua isoissa teksteissä useamminkin, vaikka alkurajan (taulukon koon) asettaisikin mahdollisimman suureksi. HashSetin voisi mahdollisesti vaihtaa joksikin muuksi tietorakenteeksi, joka on nopeampi, tai sitten yrittää parantaa hashaystä tehokkaammaksi.
 
 
 ### Lähteet

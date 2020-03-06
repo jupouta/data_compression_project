@@ -9,7 +9,13 @@ import tiralabra.datastructure.MyPrioQueue;
  */
 public class HuffmanCompression {
 
+    /**
+     * The priority queue to be created of the nodes.
+     */
     public MyPrioQueue heap;
+    /**
+     * The frequency table of the characters.
+     */
     public int[] freq;
     private final String[] code;
     private String text;
@@ -75,8 +81,10 @@ public class HuffmanCompression {
 
             Node n3 = new Node(n1.getChar() + n2.getChar(),
                     n1.getCount() + n2.getCount());
-            n3.left = n1;
-            n3.right = n2;
+            n3.setLeft(n1);
+            n3.setRight(n2);
+           // n3.left = n1;
+            //n3.right = n2;
 
             this.heap.addNode(n3);
         }

@@ -1,6 +1,11 @@
 ## Testausdokumentti
 
 ### Ohjelman testaus
+
+Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa toteutettuja luokkia ja niiden toimivuutta. Yksikkötesteissä on pyritty mahdollisimman tarkasti testaamaan erilaisia tapauksia, jotta nähdään, toimiiko ohjelma oikein ja tarpeeksi nopeasti. Alla olevassa kuvassa näkyvät rivikattavuus ja mutaatiotestien kattavuus.
+
+![Kuva mutaatiotestiraportista](picReport.png)
+
 - Kuinka kauan suorittaa:
 - Onnistuuko tekemään:
 - Mitä ei testata:
@@ -33,6 +38,3 @@ LZW tuottaa lähes saman kuin Huffman. Pituus vaikuttaa kuitenkin asiaan: jos sy
 
 
 ### Tilastoja testauksesta
-
-
-Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa toteutettuja luokkia ja niiden toimivuutta. Yksikkötesteissä on pyritty mahdollisimman tarkasti testaamaan erilaisia tapauksia, jotta nähdään, toimiiko ohjelma oikein ja tarpeeksi nopeasti.

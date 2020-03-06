@@ -3,8 +3,6 @@ package tiralabra.compression_project;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Scanner;
 import tiralabra.datastructure.MyArrayList;
 
@@ -19,6 +17,10 @@ public class Gui {
     private String filename;
     private HuffmanCompression huffmanCompr;
     private LZCompression lzCompr;
+    /**
+     * The division result needed for the Huffman decompression when
+     * reading the bytes.
+     */
     private int divisionForHuff;
 
     public Gui(Scanner scanner) {
@@ -28,6 +30,11 @@ public class Gui {
         this.divisionForHuff = 0;
     }
 
+    /**
+     * Start the compression program.
+     *
+     * @throws IOException when there is an issue.
+     */
     public void start() throws IOException {
         System.out.print("Which file do you want to read? ");
         this.filename = scanner.nextLine();
@@ -36,7 +43,7 @@ public class Gui {
         if (fileLines.length() == 0) {
             return;
         }
-        
+
         String s = String.join("\n", (String[]) fileLines.toArray());
 
         huffmanCompr = new HuffmanCompression();
@@ -45,7 +52,7 @@ public class Gui {
         long timestampBeginn = System.currentTimeMillis();
         huffmanCompress(s);
         long timestampAfter = System.currentTimeMillis();
-        double result = (timestampAfter - timestampBeginn / 1000);
+        double result = ((double) timestampAfter - (double) timestampBeginn);
         System.out.println("Huffman compression done!");
         System.out.println("Time spent: " + result);
         System.out.println("-----");
@@ -59,8 +66,8 @@ public class Gui {
         lzCompress(s);
         long timeStampLZAfter = System.currentTimeMillis();
         System.out.println("LZW compression done!");
-        System.out.println("Time spent: " + 
-                ((timeStampLZAfter - timeStampLZ) / 1000));
+        System.out.println("Time spent: "
+                + (((double) timeStampLZAfter - (double) timeStampLZ)));
         System.out.println("-----");
         System.out.println("Starting LZW decompression..");
 
@@ -68,6 +75,12 @@ public class Gui {
 
     }
 
+    /**
+     * Compress the file with the Huffman algorithm.
+     *
+     * @param lines The lines of the file as a string.
+     * @throws IOException when there is an issue.
+     */
     public void huffmanCompress(String lines) throws IOException {
         huffmanCompr.countFreqs(lines);
         huffmanCompr.addFreqs();
@@ -78,35 +91,46 @@ public class Gui {
 
     }
 
+    /**
+     * Decompress the compressed file with the Huffman algorithm.
+     *
+     * @throws IOException when there is an issue.
+     */
     public void huffmanDecompress() throws IOException {
-        byte[] array = fileHandler.readByteFile(filename, "compressed_hff.bin");
+        byte[] fileArray = fileHandler.readByteFile(filename,
+                "compressed_hff.bin");
 
-        //System.out.println(divisionForHuff);
         MyArrayList<String> binaryToString = new MyArrayList<>(String.class);
-        for (int i = 0; i < array.length; i++) {
-            byte b = array[i];
-            String asBS = null;
+        for (int i = 0; i < fileArray.length; i++) {
+            byte bt = fileArray[i];
+            String asBinStr = null;
             String formatted = null;
 
-            if (i == array.length - 1 && this.divisionForHuff != 0) { // last
-                asBS = Integer.toBinaryString((b & 0xFF) << (8 - this.divisionForHuff));
-                //System.out.println(String.format("%8s", Integer.toBinaryString((b & 0xFF)<<2)).replace(' ', '0'));
-                formatted = String.format("%8s", asBS).replace(' ', '0');
+            if (i == fileArray.length - 1 && this.divisionForHuff != 0) { //last
+                asBinStr = Integer.toBinaryString(
+                        (bt & 0xFF) << (8 - this.divisionForHuff));
+
+                formatted = String.format("%8s", asBinStr).replace(' ', '0');
                 formatted = formatted.substring(0, this.divisionForHuff);
             } else {
-                asBS = Integer.toBinaryString(b & 0xFF);
-                formatted = String.format("%8s", asBS).replace(' ', '0');
+                asBinStr = Integer.toBinaryString(bt & 0xFF);
+                formatted = String.format("%8s", asBinStr).replace(' ', '0');
             }
             binaryToString.add(formatted);
         }
 
-        String joined = String.join("", binaryToString.toArray());
-        //System.out.println(joined);
-        //System.out.println(joined.substring(joined.length() - 16));
-        String decompressed = huffmanCompr.decompress(joined);
+        String joinedArray = String.join("", binaryToString.toArray());
+
+        String decompressed = huffmanCompr.decompress(joinedArray);
         fileHandler.writeFile(filename, decompressed, "decompressed_hff.txt");
     }
 
+    /**
+     * Compress the file using the LZW algorithm.
+     *
+     * @param text The lines of the text as a string.
+     * @throws IOException when there is an issue.
+     */
     public void lzCompress(String text) throws IOException {
         MyArrayList<Integer> compressedText = lzCompr.compress(text);
 
@@ -125,8 +149,6 @@ public class Gui {
         System.out.println("Compressed file size (LZW): "
                 + (file.length() / 1024) + " kb");
 
-        //String s = String.join("|", (String[]) compressedText.toArray());
-        //fileHandler.writeFile(filename, s, "compressed_lz.txt");
     }
 
     /**
@@ -145,12 +167,12 @@ public class Gui {
         return result;
     }
 
+    /**
+     * Decompress the compressed file using LZW algorithm.
+     *
+     * @throws IOException when there is an issue.
+     */
     public void lzDecompress() throws IOException {
-        //String decompressedName = filename.substring(0, filename.length() - 4)
-        //        + "_compressed_lz.txt";
-        //MyArrayList<String> lines = fileHandler.readFile(decompressedName);
-        //String decompressed = lzCompr.decompress(String.join("\n",
-        //        (String[]) lines.toArray()));
 
         String ending = "compressed_lz.bin";
         byte[] byteFile = fileHandler.readByteFile(filename, ending);

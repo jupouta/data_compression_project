@@ -31,7 +31,8 @@ public class FileHandler {
      */
     public MyArrayList<String> readFile(String filename) {
         File file = new File(filename);
-        System.out.println("Original file size: " + (file.length() / 1024) + " kb");
+        System.out.println("Original file size: " + (file.length() / 1024)
+                + " kb");
 
         MyArrayList<String> lines = new MyArrayList<>(String.class);
 
@@ -90,7 +91,8 @@ public class FileHandler {
      * @return The array of bytes written from the file.
      * @throws IOException IOException.
      */
-    public byte[] readByteFile(String filename, String fileEnding) throws IOException {
+    public byte[] readByteFile(String filename, String fileEnding)
+            throws IOException {
         byte[] array = Files.readAllBytes(Paths.get(
                 filename.substring(0, filename.length() - 4)
                 + "_" + fileEnding));

@@ -122,7 +122,7 @@ public class LZCompressionTest {
         assertEquals("ääkköset", decompressed);
     }
     
-    @Test (timeout = 5000)
+    @Test (timeout = 10000)
     public void testWith5000() {
         MyArrayList<String> list = new MyArrayList<>(String.class);
         
@@ -150,7 +150,7 @@ public class LZCompressionTest {
         
     }
     
-    @Test (timeout = 5000)
+    @Test (timeout = 10000)
     public void testWith10000() {
         MyArrayList<String> list = new MyArrayList<>(String.class);
         
@@ -206,11 +206,11 @@ public class LZCompressionTest {
         
     }
     
-    @Test (timeout = 10000)
-    public void testWith1000000() {
+    @Test (timeout = 30000)
+    public void testWith999999() {
         MyArrayList<String> list = new MyArrayList<>(String.class);
         
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 999999; i++) {
             list.add("num" + i);
         }
         

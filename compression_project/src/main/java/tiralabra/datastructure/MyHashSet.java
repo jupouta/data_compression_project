@@ -14,13 +14,18 @@ public class MyHashSet {
     int bound;
 
     public MyHashSet() {
-        this.bound = 10;
+        this.bound = 100000000; // in order to work, large number needed
         this.theList = new MyHashNode[this.bound];
         this.items = 0;
     }
 
+    /**
+     * Add a string value to the list.
+     *
+     * @param value The value to be added as a string.
+     */
     public void add(String value) {
-        
+
         growList();     // make sure the list is big enough
 
         MyHashNode<String> entry = new MyHashNode<>(value, null);
@@ -28,11 +33,11 @@ public class MyHashSet {
         int hCode = this.hashCode(value);
         int placing = hCode % this.bound;
 
-        MyHashNode<String> givenNode = theList[placing];
+        MyHashNode<String> givenNode = this.theList[placing];
 
         if (givenNode == null) {
-            theList[placing] = entry;
-            items++;
+            this.theList[placing] = entry;
+            this.items++;
         } else {
             while (givenNode.next != null) {
                 if (givenNode.value.equals(value)) {
@@ -43,13 +48,13 @@ public class MyHashSet {
             }
 
             givenNode.next = entry;
-            items++;
+            this.items++;
         }
     }
-    
+
     /**
-     * Make the list bigger if bound is met, i.e. the bound is as big
-     * as the item count.
+     * Make the list bigger if bound is met, i.e. the bound is as big as the
+     * item count.
      */
     public void growList() {
         if (this.items == this.bound) {
@@ -61,7 +66,8 @@ public class MyHashSet {
             // copy
             for (MyHashNode<String> node : prev) {
                 while (node != null) {
-                    add(node.value);
+                    this.add(node.value);
+
                     node = node.next;
                 }
             }

@@ -1,7 +1,5 @@
 package tiralabra.compression_project;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import tiralabra.datastructure.MyArrayList;
 import tiralabra.datastructure.MyHashSet;
 
@@ -20,65 +18,37 @@ public class LZCompression {
         this.code = new MyArrayList<>(String.class);
     }
 
-    public MyArrayList<Integer> compress(String l) {
-        //MyHash myHashSet = new MyHash();
-        HashSet<String> myHashSet = new HashSet<>();
+    /**
+     * Compress the file lines to integers.
+     *
+     * @param lines The string of lines in the file to be compressed.
+     * @return The array list of integers representing the compressed version.
+     */
+    public MyArrayList<Integer> compress(String lines) {
+        MyHashSet myHashSet = new MyHashSet();
+
         // the encoding for the file
         MyArrayList<Integer> encoding = new MyArrayList<>(Integer.class);
 
         // alustus
-        for (char c : l.toCharArray()) {
+        for (char c : lines.toCharArray()) {
             String ch = "" + c;
             if (!myHashSet.contains(ch)) {
                 myHashSet.add(ch);
             }
         }
 
-        /*
-        int index = 256;
-        // window
-        for (int i = 0; i < l.length(); i++) {
-
-            // TODO: consider last
-            // ongelma tulee, kun päästään j:n loppuun
-            // tällöin i = j-1 mutta ulompi looppi kasvattaa sen samaksi kuin j
-            // ja jäljelle jää vain window(j, j)
-            for (int j = i; j < l.length(); j++) { // askel
-
-                String window = l.substring(i, j);
-
-                if (window.length() == 0) {
-                    continue;
-                }
-
-                if (myHashSet.contains(window)) {
-                    continue;
-                } else {
-                    myHashSet.add(window);
-
-                    String prev = window.substring(0, window.length() - 1);
-
-                    if (prev.length() == 1) { // single character (with ascii)
-                        encoding.add((int) prev.charAt(0));
-                    } else {
-                        encoding.add(index);
-                        code.add(prev);   // string of characters without ascii
-                        index++;
-                    }
-                    i = j - 1;
-                }
-            }
-        }*/
-        if (l.length() == 1) {   // texts with only one char
-            encoding.add((int) l.charAt(0));
+        if (lines.length() == 1) {   // texts with only one char
+            encoding.add((int) lines.charAt(0));
             return encoding;
         }
 
-        int indForCharCode = 256;
-        String p = l.charAt(0) + "";
-        for (int i = 1; i < l.length(); i++) {
+        int indForCharCode = 256;   // the numbers after ascii code
+        String p = lines.charAt(0) + "";
 
-            String c = l.charAt(i) + "";
+        for (int i = 1; i < lines.length(); i++) {
+
+            String c = lines.charAt(i) + "";
 
             if (myHashSet.contains(p + c)) {
                 p = p + c;
@@ -97,11 +67,11 @@ public class LZCompression {
             }
 
             // add the last chars to encoding
-            if (i == l.length() - 1) {
-                if (p.length() == 1) { // single char
+            if (i == lines.length() - 1) {
+                if (p.length() == 1) {  // single char
                     int asciiP = (int) p.charAt(0);
                     encoding.add(asciiP);
-                } else { // multiple characters
+                } else {    // multiple characters
                     encoding.add(indForCharCode);
                     code.add(p);
                 }
@@ -110,8 +80,14 @@ public class LZCompression {
         return encoding;
     }
 
+    /**
+     * Return the decompressed version of the file as a string.
+     *
+     * @param lines The compressed version of the file as a string.
+     * @return The decompressed file as a string.
+     */
     public String decompress(String lines) {
-        // TODO: change this
+
         String[] linesSplit = lines.split("\\|");
 
         MyArrayList listDecomp = new MyArrayList<>(String.class);

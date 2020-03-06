@@ -3,8 +3,6 @@ package tiralabra.datastructure;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tiralabra.datastructure.MyHashSet;
-
 
 public class MyHashSetTest {
 
@@ -35,8 +33,7 @@ public class MyHashSetTest {
         for (int i = 0; i < 11; i++) {
             hashList.add(i + "");
         }
-        
-        assertEquals(20, hashList.theList.length);
+        assertTrue(hashList.items == 11);
     }
     
     @Test
@@ -61,7 +58,7 @@ public class MyHashSetTest {
             realNum += (ascii * (Math.pow(2.0, elemLength - 1 + i)));
         }
         
-        assertEquals(realNum % 10, num);
+        assertEquals(realNum % 100000000, num);
     }
     
     @Test
@@ -69,22 +66,22 @@ public class MyHashSetTest {
         MyHashSet hashList = new MyHashSet();
         int num = hashList.hashCode("kissa");
 
-        assertTrue((num % 10) < 10);
+        assertTrue((num % 100000000) < 100000000);
     }
     
-    /*
-    @Test(timeout = 10000)
+    
+    @Test(timeout = 15000)
     public void addMore() {
         MyHashSet hashList = new MyHashSet();
         
         for (int i = 1; i < 100000; i++) {
-            hashList.add("num"+ (i-100));
+            hashList.add("num"+ i);
         }
         
-        assertEquals(true, hashList.contains("" + 1));
-        assertEquals(true, hashList.contains("" + 5));
-        assertEquals(true, hashList.contains("" + 1000));
-    }*/
+        assertEquals(true, hashList.contains("num" + 1));
+        assertEquals(true, hashList.contains("num" + 5));
+        assertEquals(true, hashList.contains("num" + 5000));
+    }
     
     @Test
     public void hashContains() {
@@ -111,12 +108,10 @@ public class MyHashSetTest {
     @Test
     public void testGrowing() {
         MyHashSet hashList = new MyHashSet();
-        for (int i = 0; i < 10; i++) {
-            hashList.add(i + "");
-        }
+        hashList.items = 100000000;
         
         hashList.growList();
         
-        assertEquals(20, hashList.theList.length);
+        assertEquals(100000000*2, hashList.theList.length);
     }
 }

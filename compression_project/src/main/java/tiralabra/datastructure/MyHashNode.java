@@ -1,8 +1,11 @@
 package tiralabra.datastructure;
 
+/**
+ * The object to be used for the hash set.
+ * @param <String> The string object.
+ */
 public class MyHashNode<String> {
 
-    // K int, V string
     String value;
     MyHashNode<String> next;
 

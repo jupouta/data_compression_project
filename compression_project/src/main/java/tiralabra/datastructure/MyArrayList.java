@@ -1,5 +1,6 @@
 package tiralabra.datastructure;
 
+// See below why this is used
 import java.lang.reflect.Array;
 
 /**
@@ -9,10 +10,17 @@ import java.lang.reflect.Array;
  */
 public class MyArrayList<T> {
 
-    T[] lista;
-    int items;
-    int bound;
-    Class<T> typeClass;
+    private T[] lista;
+    private int items;
+    /**
+     * Variable needed for making the list bigger. When the bound is met, the
+     * list has to be doubled.
+     */
+    private int bound;
+    /**
+     * The type of variable to be used for the array list.
+     */
+    private final Class<T> typeClass;
 
     public MyArrayList(Class<T> c) {
         this.typeClass = c;
@@ -24,12 +32,23 @@ public class MyArrayList<T> {
 
     }
 
+    /**
+     * Return toString version of this array list.
+     * @return toString, which includes the list, the item count in the list,
+     * and the bound at the moment.
+     */
     @Override
     public String toString() {
         return "MyArrayList{" + "lista=" + this.lista + ", items=" + this.items
                 + ", bound=" + this.bound + '}';
     }
 
+    /**
+     * Return the element in the given index.
+     *
+     * @param index The index of the element as an integer.
+     * @return The element at the given index.
+     */
     public T get(int index) {
         if (index > this.items) {
             return null;
@@ -51,10 +70,12 @@ public class MyArrayList<T> {
         if (this.items >= this.bound) {
             this.bound *= 2;
 
-            // I wasn't able to accept any data type (strings, integers, etc.),
-            // which is the reason why this Array method is used.
-            // Other solution would have been to make this array list only
-            // for strings. Then there wouldn't have been any need for this.
+            // I wasn't able to make the array list accept any data type
+            // (strings, integers, etc.), which is the reason why this Array
+            // method is used.
+            // Other solution would have been to make this array list only for
+            // strings. Then there wouldn't have been any need for this method,
+            // but I needed this for integers as well.
             @SuppressWarnings("unchecked")
             final T[] a = (T[]) Array.newInstance(this.typeClass, this.bound);
 
@@ -66,10 +87,21 @@ public class MyArrayList<T> {
         }
     }
 
+    /**
+     * Returns the number of items in the list.
+     *
+     * @return The number of items as an integer.
+     */
     public int length() {
         return this.items;
     }
 
+    /**
+     * Return the list as an array. As the array list contains objects of any
+     * variable type, the list has to be copied to an array.
+     *
+     * @return The array version of the array list.
+     */
     public T[] toArray() {
         final T[] a = (T[]) Array.newInstance(this.typeClass, this.items);
         for (int i = 0; i < this.items; i++) {

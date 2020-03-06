@@ -1,6 +1,8 @@
 ## Käyttöohje
 
-Ohjelma kysyy ensin, mikä tiedosto halutaan kompressoida. Syötteenä annetaan siis tiedoston nimi ja kyseinen tiedosto kompressoidaan sekä Huffmanin että LZW:n kompressiometodeilla. Ohjelma tulostaa aluksi tiedoston koon, jotta tätä voidaan verrata kompressoituihin tiedostoihin. Tämän jälkeen ohjelma tulostaa, milloin kompressiot ovat valmiit ja kuinka isoja kompressoidut tiedostot ovat. Lisäksi ohjelma tulostaa dekompressioiden valmistumisen ja tiedostojen koot, joiden pitäisi olla samat kuin alkuperäisellä tiedostolla.
+Ohjelma kysyy ensin, mikä tiedosto halutaan kompressoida. Syötteenä annetaan siis polku tiedoston nimeen ja kyseinen tiedosto kompressoidaan sekä Huffmanin että LZW:n kompressiometodeilla. Tiedoston nimi voidaan siis antaa joko suhteellisena tai absoluuttisena polkuna.
+
+Ohjelma tulostaa aluksi tiedoston koon, jotta tätä voidaan verrata kompressoituihin tiedostoihin. Tämän jälkeen ohjelma tulostaa, milloin kompressiot ovat valmiit ja kuinka isoja kompressoidut tiedostot ovat. Lisäksi ohjelma tulostaa dekompressioiden valmistumisen ja tiedostojen koot, joiden pitäisi olla samat kuin alkuperäisellä tiedostolla.
 
 Ohjelma toimii parhaiten tekstitiedostoilla, joissa on vain tavallisen ASCII-merkistön merkkejä (a-z).
 
