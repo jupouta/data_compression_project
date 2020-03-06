@@ -2,7 +2,7 @@
 
 ### Ohjelman testaus
 
-Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa toteutettuja luokkia ja niiden toimivuutta. Yksikkötesteissä on pyritty mahdollisimman tarkasti testaamaan erilaisia tapauksia, jotta nähdään, toimiiko ohjelma oikein ja tarpeeksi nopeasti. Alla olevassa kuvassa näkyvät rivikattavuus ja mutaatiotestien kattavuus.
+Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa toteutettuja luokkia ja niiden toimivuutta. Yksikkötesteissä on pyritty mahdollisimman tarkasti testaamaan erilaisia tapauksia, jotta nähdään, toimiiko ohjelma oikein ja tarpeeksi nopeasti. Alla olevassa kuvassa näkyvät rivikattavuus ja mutaatiotestien kattavuus. Kattavuus on automaattisten raporttien perusteella varsin hyvä.
 
 ![Kuva mutaatiotestiraportista](picReport.png)
 
@@ -18,23 +18,25 @@ Ohjelmaa on testattu yksikkötesteillä. Yksikkötestit testaavat ohjelmassa tot
 ### Testitapaukset
 Testauksessa on otettu huomioon erityisesti alla olevia testitapauksia.
 
+ELI MUKAAN SIIS
+- TIEDOSTON KOKO
+- KULUNUT AIKA
+- MILLAINEN TESTATTAVA TIEDOSTO ON
+
 #### Huffman
-##### Saman kirjaimen/ilmauksen toisto
+- Saman kirjaimen/ilmauksen toisto
 
-##### Täysin satunnainen
+- Täysin satunnainen / Raamattu
 
-##### Raamattu
+- Raamattu
 
 
 #### LZW
-##### Saman kirjaimen/ilmauksen toisto
+- Saman kirjaimen/ilmauksen toisto
 Nähdään, että tässä algoritmi toimii parhaiten, erityisesti mahdollisimman pitkillä syötteillä.
 
-##### Täysin satunnainen / Raamattu
+- Täysin satunnainen / Raamattu
 LZW tuottaa lähes saman kuin Huffman. Pituus vaikuttaa kuitenkin asiaan: jos syöte on lyhyt, kompressio on jopa isompi kuin alkuperäinen tiedosto. Raamatun kohdalla toistoa on tapahtunut (jos otetaan huomioon myös Raamatun muutenkin jossain määrin toisteinen kieli), ja täten myös kompressio on hyvin onnistunut.
-
-
-### Automaattiset raportit
 
 
 ### Tilastoja testauksesta

@@ -6,7 +6,11 @@ Ohjelma tulostaa aluksi tiedoston koon, jotta tätä voidaan verrata kompressoit
 
 Ohjelma toimii parhaiten tekstitiedostoilla, joissa on vain tavallisen ASCII-merkistön merkkejä (a-z).
 
-Jar sijaitsee __ ja testitiedostot __.
+Testitiedostot sijaitsevat juuren kansion test_files alla ja niillä voi testata ohjelmaa. Jar-tiedosto sijaitsee juuressa ja sen voi ajaa tavallisesti komennolla
+```
+java -jar compression_project-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+.
 
 - Miten ohjelma suoritetaan, miten eri toiminnallisuuksia käytetään
 - Minkä muotoisia syötteitä ohjelma hyväksyy
